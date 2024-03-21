@@ -1,3 +1,36 @@
+/*--header--*/
+.sgoMs7{
+    height:84px;
+    display:flex;
+    align-items: center;
+}
+
+.Header_container{
+    display:flex;
+    height:84px;
+    width:1200px;
+    align-items: center;
+}
+.ChiaCot{
+    display:flex;
+    margin-left:30px
+;
+    align-items:center
+
+}
+.logo_link{
+    height:60px;
+  /*  display: inline-block;
+    position:relative;*/
+  padding-left:10px;
+  padding-right: 10px
+}
+
+.title_header{ 
+    font-size:1.5rem;
+    color:black;
+}
+
 .login-area {
     display: flex;
     justify-content: center;
