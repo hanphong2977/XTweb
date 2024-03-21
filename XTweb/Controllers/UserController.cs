@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using XTweb.Models;
 
 namespace XTBarber.Controllers
 {
     public class UserController : Controller
     {
+        XuanTamDbContext context = new XuanTamDbContext();
+
         public IActionResult Index()
         {
-            return View();
+            var lstDichVu = context.DichVus.ToList();
+
+            return View(lstDichVu);
         }
 
         public ActionResult dichvu()
