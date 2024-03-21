@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\image\3f470014a80603585a17.jpg" />
+    <None Include="wwwroot\image\about-shape.png" />
+    <None Include="wwwroot\image\banner.mp4" />
+    <None Include="wwwroot\image\banner1.mp4" />
+    <None Include="wwwroot\image\banner2.mp4" />
+    <None Include="wwwroot\image\barber-shop-la-gi-4.jpg" />
+    <None Include="wwwroot\image\barber-shop-viet-nam-5.jpg" />
+    <None Include="wwwroot\image\Barber1.png" />
+    <None Include="wwwroot\image\barber11 - Made with PosterMyWall %28online-video-cutter.com%29.mp4" />
+    <None Include="wwwroot\image\barber11 - Made with PosterMyWall.mp4" />
+    <None Include="wwwroot\image\barber2png.jpg" />
+    <None Include="wwwroot\image\barber3.png" />
+    <None Include="wwwroot\image\Barbershop - Made with PosterMyWall %28online-video-cutter.com%29.mp4" />
+    <None Include="wwwroot\image\barbershop-tools.jpg" />
+    <None Include="wwwroot\image\Beard Triming.png" />
+    <None Include="wwwroot\image\boy.jpg" />
+    <None Include="wwwroot\image\edită.jpg" />
+    <None Include="wwwroot\image\footer_bg.png" />
+    <None Include="wwwroot\image\ggmap.PNG" />
+    <None Include="wwwroot\image\Haircut Styles.png" />
+    <None Include="wwwroot\image\icon.png" />
+    <None Include="wwwroot\image\ironcap-barbershop-1002692.jpg" />
+    <None Include="wwwroot\image\keo.png" />
+    <None Include="wwwroot\image\khoi.jpg" />
+    <None Include="wwwroot\image\logo.png" />
+    <None Include="wwwroot\image\matna.png" />
+    <None Include="wwwroot\image\menu.png" />
+    <None Include="wwwroot\image\nav-link-img.png" />
+    <None Include="wwwroot\image\nhuộm.jpg" />
+    <None Include="wwwroot\image\Phuchoitoc.png" />
+    <None Include="wwwroot\image\Smooth Shave.png" />
+    <None Include="wwwroot\image\staff_bg.png" />
+    <None Include="wwwroot\image\staff_bg_hover.png" />
+    <None Include="wwwroot\image\Taydachet.png" />
+    <None Include="wwwroot\image\taytoc.png" />
+    <None Include="wwwroot\image\ThuocNhuom.png" />
+    <None Include="wwwroot\image\tin.jpg" />
+    <None Include="wwwroot\image\uongtoc.png" />
+    <None Include="wwwroot\image\XT %281%29.png" />
+    <None Include="wwwroot\image\XTbb.png" />
+  </ItemGroup>
+
+</Project>

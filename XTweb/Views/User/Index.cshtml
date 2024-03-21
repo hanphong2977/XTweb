@@ -1,0 +1,365 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <!-- banner -->
+    <div class="container-fluid p-0 pt-5">
+        <video style="pointer-events: none"
+               controls
+               autoplay
+               loop
+               muted>
+            <source src="/image/banner2.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <!-- About -->
+    <section class="about-area section-padding30 position-relative"
+             id="gioithieu">
+        <div class="container">
+            <div class="row align-items-center my-5">
+                <div class="col-lg-6 col-md-11">
+                    <div class="about-img">
+                        <video class="video-size30"
+                               style="pointer-events: none; border: 2px solid #ad9551"
+                               controls
+                               autoplay
+                               loop
+                               muted>
+                        <source src="/image/barber11 - Made with PosterMyWall (online-video-cutter.com).mp4"
+                                    type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-11 mb-auto">
+                    <div class="section-title section-tittle3 mb-35">
+                        <span style="font-size: x-large"> Về chúng tôi </span>
+                        <h2>Uy tín tôn lên thương hiệu của Xuân Tâm Barber</h2>
+                    </div>
+                    <p class="mb-30 pera-bottom" style="font-size: larger">
+                        Brook presents your services with flexible, convenient and cdpoe
+                        layouts. You can select your favorite layouts & elements for cular
+                        ts with unlimited ustomization possibilities.
+                        Pixel-perfreplication of the designers is intended.
+                    </p>
+                    <p class="pera-top mb-50">
+                        Brook presents your services with flexible, convefnient and ent
+                        anipurpose layouts. You can select your favorite.
+                    </p>
+                    <div>
+                        <img style="width: 630px; height: 390px"
+                         src="/image/about-shape.png"
+                             alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nhân Viên -->
+    <div class="team-area pb180" id="nhanvien">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md">
+                    <div class="section_title text-center mb-5">
+                        <h3><strong>Đội Chúng Tôi</strong></h3>
+                        <p>Những nhân viên cắt tóc được vinh danh trong tháng</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                        <img src="/image/khoi.jpg" class="staff_img_style" alt="..." />
+                            <div class="staff_name_title">
+                                <p class="staff_name_title_text">Trần Hoàng Minh Khôi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                        <img src="/image/khoi.jpg" class="staff_img_style" alt="..." />
+                            <div class="staff_name_title">
+                                <p class="staff_name_title_text">Trần Hoàng Minh Khôi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                        <img src="/image/khoi.jpg" class="staff_img_style" alt="..." />
+                            <div class="staff_name_title">
+                                <p class="staff_name_title_text">Trần Hoàng Minh Khôi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- service -->
+            <div class="service_area" id="dichvu">
+          <div class="container" style="border: 2px solid #ad9551; border-radius: 10px">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-10">
+                            <div class="section_title text-center mb-5 mt-5">
+                                <h3><strong>Các Dịch Vụ</strong></h3>
+                                <p>
+                                    Ở đây chúng tôi cung cấp cho bạn các dịch vụ có chất lượng
+                                    tốt nhất
+                                </p>
+                            </div>
+                        </div>
+                    <div class="prices_area" id="banggia">
+                        <div class="banggia_container pt-5 pb-0 mb-0">
+                            <div class="icon_title">
+                                <div style="
+                                    width: 90px;
+                                    height: 90px;
+                                    border: 1px solid black;
+                                    border-radius: 80px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-items: center;
+                                    justify-content: center;
+                                  ">
+                                    <a asp-controller="User" asp-action="dichvu">
+                                        <img class="icon_banggia" src="/image/keo.png " alt="hottoc" />
+                                  </a>
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Cắt - gội</h6>
+                                    <span style="text-align: center">100k</span>
+                                </div>
+                            </div>
+                            <div class="icon_title">
+                                <div style="
+                                    width: 90px;
+                                    height: 90px;
+                                    border: 1px solid black;
+                                    border-radius: 80px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-items: center;
+                                    justify-content: center;
+                                    ">
+                                    <a asp-controller="User" asp-action="dichvu"> <img class="icon_banggia" src="/image/uongtoc.png " alt="hottoc" /> </a>
+                                    
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Uốn</h6>
+                                    <span style="text-align: center">200k</span>
+                                </div>
+                            </div>
+                            <div class="icon_title">
+                                <div style="
+                                        width: 90px;
+                                        height: 90px;
+                                        border: 1px solid black;
+                                        border-radius: 80px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-items: center;
+                                        justify-content: center;
+                                        ">
+                                    <a asp-controller="User" asp-action="dichvu"><img class="icon_banggia" src="/image/Phuchoitoc.png" alt="hottoc" /> </a>
+                                    
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Phục Hồi</h6>
+                                    <span style="text-align: center">500k</span>
+                                </div>
+                            </div>
+                            <div class="icon_title">
+                                <div style="
+                                    width: 90px;
+                                    height: 90px;
+                                    border: 1px solid black;
+                                    border-radius: 80px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-items: center;
+                                    justify-content: center;
+                                     ">
+
+                                    <a asp-controller="User" asp-action="dichvu">    <img class="icon_banggia" src="/image/taytoc.png" alt="hottoc" /></a>
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Tẩy Tóc</h6>
+                                    <span style="text-align: center">1000k</span>
+                                </div>
+                            </div>
+                            <div class="icon_title">
+                                <div style="
+                                        width: 90px;
+                                        height: 90px;
+                                        border: 1px solid black;
+                                        border-radius: 80px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-items: center;
+                                        justify-content: center;
+                                      ">
+                                    <a asp-controller="User" asp-action="dichvu">    <img class="icon_banggia" src="/image/Taydachet.png " alt="hottoc" /></a>
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Tẩy Da Chết</h6>
+                                    <span style="text-align: center">2000k</span>
+                                </div>
+                            </div>
+                            <div class="icon_title">
+                                <div style="
+                                        width: 90px;
+                                        height: 90px;
+                                        border: 1px solid black;
+                                        border-radius: 80px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-items: center;
+                                        justify-content: center;
+                                      ">
+                                     <a asp-controller="User" asp-action="dichvu">     <img class="icon_banggia"
+                                         src="/image/ThuocNhuom.png "
+                                             alt="hottoc" />
+                                    </a>
+                                </div>
+                                <div class="title_banggia" style="text-align: center">
+                                    <h6>Nhuộm</h6>
+                                    <span style="text-align: center">400k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đặt Lịch -->
+            <div class="booking_area" id="datlich">
+                <div class="booking_form">
+                    <form class="form_datlich">
+                        <div class="to">
+                    <h2 style="font-family: Oswald; font-size: 50px; font-weight: 400; text-align:center;"><b>Đặt lịch ngay</b></h2>
+                    <label style="margin-left:0 auto; margin-top: 3px;">Họ và tên</label>
+                    <input type="text" id="name" name="customername" required>
+                            <label style="margin-left: 0 auto">Email</label>
+                    <input type="email" id="email" name="customeremail" required>
+                            <label style="margin-left: 0 auto">Số điện thoại</label>
+                    <input type="tel" id="phone" name="customerphone" required>
+                    <label style="margin-left: 0 auto">Ngày giờ hẹn</label>
+                    <input type="datetime-local" min="2024-3-17" max="2024-4-30" id="date" name="datetime" required>
+                    <label style="margin-left:0 auto">Chọn dịch vụ</label>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Cắt - Gội</label>
+                            <input style="margin-right: 10px;  margin-top: -25px; margin-bottom:10px; " type="checkbox" id="catgoi" value="" name="dichvu">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Uốn</label>
+                            <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Uon" value="" name="dichvu">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Phục hồi</label>
+                            <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Phuchoi" value="" name="dichvu">
+                        </div>
+                        <div class="col-6">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Tẩy tóc</label>
+                            <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Taytoc" value="" name="dichvu">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Tẩy da chết</label>
+                            <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Taydachet" value="" name="dichvu">
+                            <label style="margin-left: 112.5px; margin-top: 20px;">Nhuộm</label>
+                            <input style="margin-right: 10px;margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Nhuom" value="" name="dichvu">
+                        </div>
+                    </div>
+
+                    
+                    
+                    <br>
+                            <button class="submit">
+                        <nav> <a style="text-decoration: none; color: white;" aria-current="page" asp-controller="User" asp-action="thanhtoan">Gửi</a></nav>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="booking_content">
+                        <div class="diachi_booking_content">
+                            <div class="content_container">
+                                <h5>Đến ngay với chúng tôi tại</h5>
+                                <p>43Q đường 160, Tăng Nhơn Phú A, Thủ Đức</p>
+                                <h5>Liên hệ với chúng tôi qua</h5>
+                                <p>chitin952003@gmail.com <br />(+84) 706389781</p>
+
+                                <h5>Thời gian làm việc</h5>
+                                <p>9:00 - 21:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+    <!-- hình ảnh -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8 col-md">
+                <div class="section_title text-center">
+                    <h3><strong>Kho ảnh của chúng tôi</strong></h3>
+                    <p>Một vài hình ảnh của Xuân Tâm barber</p>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="box mb-30">
+                        <div class="gallery-img">
+                            <img style="margin-left: 100px; border-radius: 15px"
+                             src="/image/edită.jpg"
+                                 alt="" />
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6 col-sm-6">
+                    <div class="box mb-30">
+                        <div class="gallery-img">
+                            <img style="
+                    height: 425px;
+                    width: 750px;
+                    margin-left: -37px;
+                    border-radius: 15px;
+                  "
+                             src="/image/barber-shop-viet-nam-5.jpg"
+                                 alt="" />
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6 col-sm-6">
+                    <div class="box mb-30">
+                        <div class="gallery-img">
+                            <img style="
+                                    margin-top: 20px;
+                                    margin-left: 100px;
+                                    border-radius: 15px;
+                                  "
+                             src="/image/barber-shop-la-gi-4.jpg"
+                                 alt="" />
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="box mb-30">
+                        <div class="gallery-img">
+                            <img style="
+                                    height: 400px;
+                                    width: 420px;
+                                    margin: 20px;
+                                    margin-left: -140px;
+                                    margin-bottom: -30px;
+                                    border-radius: 15px;
+                                  "
+                             src="/image/ironcap-barbershop-1002692.jpg"
+                                 alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
