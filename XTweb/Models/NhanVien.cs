@@ -17,5 +17,7 @@ public partial class NhanVien
 
     public string MatKhau { get; set; } = null!;
 
+    public string? AnhNhanVien { get; set; }
+
     public virtual ICollection<LichHen> LichHens { get; set; } = new List<LichHen>();
 }

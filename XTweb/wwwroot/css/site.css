@@ -577,3 +577,21 @@ input {
         background-color: #ad9551;
     }
 
+
+.video-container {
+    position: relative;
+}
+
+    .video-container video {
+        width: 100%;
+        height: auto;
+    }
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}

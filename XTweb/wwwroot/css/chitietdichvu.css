@@ -1,6 +1,5 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-
 /*=============== VARIABLES CSS ===============*/
 :root {
     /*========== Colors ==========*/
@@ -37,11 +36,10 @@ body {
     background-color: var(--body-color);
     color: var(--text-color);
 }
-
-img {
+.card__article img {
     display: block;
-    max-width: 100%;
-    height: auto;
+    max-width: 240px;
+    max-height: 350px;
 }
 
 /*=============== CARD ===============*/
@@ -60,18 +58,22 @@ img {
 }
 
 .card__article {
+    width: 330px;
+    height: 450px;
     position: relative;
     overflow: hidden;
+    border-radius: 1.5rem;
+    border: 2px solid #ad9551;
 }
 
 .card__img {
-    width: 328px;
-    border-radius: 1.5rem;
+    margin-top: 50px;
+    margin-left: 40px
 }
 
 .card__data {
     width: 280px;
-    background-color: var(--container-color);
+    background-color: transparent;
     padding: 1.5rem 2rem;
     box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
     border-radius: 1rem;
@@ -82,11 +84,13 @@ img {
     margin-inline: auto;
     opacity: 0;
     transition: opacity 1s 1s;
+    backdrop-filter: blur(15px);
 }
 
 .crad__description {
     display: block;
     font-size: var(--small-font-size);
+    color:black;
     margin-bottom: .25rem;
 }
 
@@ -99,16 +103,25 @@ img {
 
 .card__button {
     text-decoration: none;
-    font-size: var(--small-font-size);
-    font-weight: 500;
-    color: var(--first-color);
+    width: 35px;
+    height: 35px;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: auto;
+    position: relative;
+    background-image: url(../image/shopping-cart.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    background-color: #ad9551;
+    border: 1px solid hsl(0, 0%, 15%);
 }
 
     .card__button:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 /* Naming animations in hover */
-.card__article:hover .card__data {
+    .card__article:hover .card__data {
     animation: show-data 1s forwards;
     opacity: 1;
     transition: opacity .3s;
