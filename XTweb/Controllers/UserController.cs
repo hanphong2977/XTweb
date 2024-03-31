@@ -5,23 +5,38 @@ namespace XTBarber.Controllers
 {
     public class UserController : Controller
     {
-        XuanTamDbContext context = new XuanTamDbContext();
+        XuanTamDbContext _context = new XuanTamDbContext();
 
         public IActionResult Index()
         {
-            var lstDichVu = context.DichVus.ToList();
+            var model = new IndexViewModel
+            {
+                DanhSachDichVu = _context.DichVus.ToList(),
+                DanhSachNhanVien = _context.NhanViens.ToList(),
+            };
 
-            return View(lstDichVu);
+            return View(model);
         }
 
         public ActionResult dichvu()
         {
-            return View();
+            var model = new ProductViewModels
+            {
+                sanPhams_DauGoi = _context.SanPhams.Where(x => x.MaDanhMuc == 1).ToList(),
+                sanPhams_SuaTam = _context.SanPhams.Where(x => x.MaDanhMuc == 2).ToList(),
+                sanPhams_SapVotToc = _context.SanPhams.Where(x => x.MaDanhMuc== 3).ToList(),
+                sanPhams_GelTaoKieuToc = _context.SanPhams.Where(x => x.MaDanhMuc == 4).ToList(),
+                sanPhams_NuocHoa = _context.SanPhams.Where(x => x.MaDanhMuc == 5).ToList(),
+                sanPhams_XitKhuMui = _context.SanPhams.Where(x => x.MaDanhMuc == 6).ToList(),
+            };
+
+            return View(model);
 
         }
 
         public ActionResult gioithieu()
         {
+           
             return View();
         }
 

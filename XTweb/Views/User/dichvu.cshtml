@@ -1,253 +1,143 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@model ProductViewModels
+
 <!--banner -->
 <div class="slider mt-5">
     <div class="slider-height d-flex align-items-center justify-content-center">
         <div class="herocap">
-            <h2 style="font-size: 50px; font-weight:700; color: #fff"> Dịch Vụ </h2>
+            <h2 style="font-size: 50px; font-weight:700; color: #fff"> Sản Phẩm </h2>
         </div>
     </div>
 </div>
-<!-- service -->
-    <div class="service__container">
-      <!-- Cắt-Gội -->
-      <div class="col-lg-6 col-md-10 pt-5">
+<!-- Product -->
+<div class="service__container">
+    <!-- Dầu Gội -->
+    <div class="col-lg-6 col-md-10 pt-5">
         <div class="section_title text-center mb-5">
-          <h3><strong>Cắt-Gội</strong></h3>
+            <h3><strong>Dầu Gội</strong></h3>
         </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Standard</h2>
-            <span class="crad__description">Gói dịch vụ bao gồm: <br>-Cắt <br>-Cạo <br>-Xã <br>- Vuốt Sáp</span>
-            <span class="card-description"><strong style="color: red;">Giá: 50.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Premium</h2>
-            <span class="crad__description">Gói dịch vụ bao gồm: <br>-Cắt <br>-Cạo <br>-Xã <br>- Vuốt Sáp <br>-Cạo Mặt <br>-Lột Mụn</span>
-            <span class="card-description"><strong style="color: red;">Giá: 80.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Vip</h2>
-            <span class="crad__description">Gói dịch vụ bao gồm: <br>-Cắt <br>-Cạo <br>-Xã <br>-Vuốt Sáp <br>-Cạo Mặt <br>-Lột Mụn <br>-Ráy Tai </span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <!-- Uốn -->
-      <div class="col-lg-6 col-md-10 pt-5">
-        <div class="section_title text-center mb-5">
-          <h3><strong>Uốn</strong></h3>
-        </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Tiêu Chuẩn</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Cao Cấp</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Con Sâu</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <div class="card__container pt-5">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Ruffled</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Medusa</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Uốn Premlock</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <!-- Phục Hồi -->
-      <div class="col-lg-6 col-md-10 pt-5">
-        <div class="section_title text-center mb-5">
-          <h3><strong>Phục Hồi</strong></h3>
-        </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Standard</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói premium </h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Vip</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <!-- Nhuộm -->
-      <div class="col-lg-6 col-md-10 pt-5">
-        <div class="section_title text-center mb-5">
-          <h3><strong>Nhuộm</strong></h3>
-        </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Nhuộm Tiêu Chuẩn</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Nhuộm Cao Cấp</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Nhuộm Thời Trang</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <!-- Tẩy Tóc -->
-      <div class="col-lg-6 col-md-10 pt-5">
-        <div class="section_title text-center mb-5">
-          <h3><strong>Tẩy Tóc</strong></h3>
-        </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Standard</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói premium</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Vip</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
-      <!-- Tẩy Da Chết -->
-      <div class="col-lg-6 col-md-10 pt-5">
-        <div class="section_title text-center mb-5">
-          <h3><strong>Tẩy Da Chết</strong></h3>
-        </div>
-      </div>
-      <div class="card__container">
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Standard</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói premium</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img src="~/image/khoi.jpg" alt="image" class="card__img">
-          <div class="card__data">
-            <h2 class="card__title">Gói Vip</h2>
-            <span class="crad__description"></span>
-            <span class="card-description"><strong style="color: red;">Giá: 100.000đ</strong><br></span>
-            <a href="" class="card__button">Đặt Lịch Ngay</a>
-          </div>
-        </article>
-      </div>
     </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_DauGoi)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+    <!-- Sữa Tắm -->
+    <div class="col-lg-6 col-md-10 pt-5">
+        <div class="section_title text-center mb-5">
+            <h3><strong>Sữa Tắm</strong></h3>
+        </div>
+    </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_SuaTam)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+    <!-- Sáp Vuốt Tóc -->
+    <div class="col-lg-6 col-md-10 pt-5">
+        <div class="section_title text-center mb-5">
+            <h3><strong>Sáp Vuốt Tóc</strong></h3>
+        </div>
+    </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_SapVotToc)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+    <!-- Gel Tạo Kiểu Tóc -->
+    <div class="col-lg-6 col-md-10 pt-5">
+        <div class="section_title text-center mb-5">
+            <h3><strong>Gel Tạo Kiểu Tóc</strong></h3>
+        </div>
+    </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_GelTaoKieuToc)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+    <!-- Nước Hoa -->
+    <div class="col-lg-6 col-md-10 pt-5">
+        <div class="section_title text-center mb-5">
+            <h3><strong>Nước Hoa</strong></h3>
+        </div>
+    </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_NuocHoa)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+    <!-- Xịt Khử Mùi -->
+    <div class="col-lg-6 col-md-10 pt-5">
+        <div class="section_title text-center mb-5">
+            <h3><strong>Xịt Khử Mùi</strong></h3>
+        </div>
+    </div>
+    <div class="card__container">
+        @foreach (var item in Model.sanPhams_XitKhuMui)
+        {
+            <article class="card__article">
+                <img src="@item.HinhAnh" alt="image" class="card__img">
+                <div class="card__data">
+                    <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
+                    <div class="mt-3">
+                        <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
+                        <a href="" class="card__button"></a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</div>

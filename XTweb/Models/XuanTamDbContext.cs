@@ -138,6 +138,7 @@ public partial class XuanTamDbContext : DbContext
 
             entity.ToTable("NhanVien");
 
+            entity.Property(e => e.AnhNhanVien).IsUnicode(false);
             entity.Property(e => e.DiaChi).HasMaxLength(250);
             entity.Property(e => e.Email)
                 .HasMaxLength(80)
