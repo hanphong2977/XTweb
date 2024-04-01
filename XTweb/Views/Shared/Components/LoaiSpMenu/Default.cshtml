@@ -1,0 +1,12 @@
+﻿@model IEnumerable<DanhMucSanPham>
+<li class="nav-item dropdown px-4">
+    <a class="nav-link dropdown-toggle text-light" asp-controller="User" asp-action="dichvu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <b>Sản Phẩm</b>
+    </a>
+    <ul class="dropdown-menu">
+        @foreach(var item in Model)
+        {
+            <li class="li-hover"><a class="dropdown-item" asp-controller="User" asp-action="dichvu" asp-route-maloai="@item.MaDanhMuc">@item.TenDanhMuc</a></li>
+        }
+    </ul>
+</li>

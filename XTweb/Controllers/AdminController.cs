@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using XTweb.Models;
+using XTweb.Repository;
 
 namespace XTweb.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly ISanPhamRepository _sanPhamRepository;
+        private readonly ILoaiSanPhamRepository _loaiSanPhamRepository;
+        public AdminController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository)
+        {
+            _sanPhamRepository = sanPhamRepository;
+            _loaiSanPhamRepository = loaiSanPhamRepository;
+        }
 
         XuanTamDbContext _context = new XuanTamDbContext();
 
@@ -27,10 +35,10 @@ namespace XTweb.Controllers
         {
             return View();
         }
-        public IActionResult sanpham()
+        public async Task<IActionResult> sanpham()
         {
-            var model = _context.SanPhams.ToList();
-            return View(model);
+            var sanpham = await _sanPhamRepository.GetAllAsync();
+            return View(sanpham);
         }
 
     }
