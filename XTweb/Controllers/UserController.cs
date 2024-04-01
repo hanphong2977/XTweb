@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 using XTweb.Models;
 
 namespace XTBarber.Controllers
