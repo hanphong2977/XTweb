@@ -1,11 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using XTweb.Models;
+using XTweb.Repository;
 
 namespace XTBarber.Controllers
 {
     public class UserController : Controller
     {
+        private readonly ISanPhamRepository _sanPhamRepository;
+        private readonly ILoaiSanPhamRepository _loaiSanPhamRepository;
+        public UserController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository)
+        {
+            _sanPhamRepository = sanPhamRepository;
+            _loaiSanPhamRepository = loaiSanPhamRepository;
+        }
         XuanTamDbContext _context = new XuanTamDbContext();
 
         public IActionResult Index()
@@ -19,58 +28,69 @@ namespace XTBarber.Controllers
             return View(model);
         }
 
-        public ActionResult dichvu()
+        public async Task<IActionResult> dichvuAsync(int maloai, int? page)
         {
-            var model = new ProductViewModels
-            {
-                sanPhams_DauGoi = _context.SanPhams.Where(x => x.MaDanhMuc == 1).ToList(),
-                sanPhams_SuaTam = _context.SanPhams.Where(x => x.MaDanhMuc == 2).ToList(),
-                sanPhams_SapVotToc = _context.SanPhams.Where(x => x.MaDanhMuc== 3).ToList(),
-                sanPhams_GelTaoKieuToc = _context.SanPhams.Where(x => x.MaDanhMuc == 4).ToList(),
-                sanPhams_NuocHoa = _context.SanPhams.Where(x => x.MaDanhMuc == 5).ToList(),
-                sanPhams_XitKhuMui = _context.SanPhams.Where(x => x.MaDanhMuc == 6).ToList(),
-            };
+            int pageSize = 3;
+            int pageNumber = page == null || pageSize < 1 ? 1 : page.Value;
+            var lstSanPham = _context.SanPhams.AsNoTracking().Where(x => x.MaDanhMuc == maloai).OrderBy(x => x.TenSanPham);
 
-            return View(model);
+            var pagedList = await lstSanPham.ToPagedListAsync(pageNumber, pageSize);
+
+            ViewBag.maLoai = maloai;
+            ViewBag.tenloai = _context.DanhMucSanPhams.Where(x => x.MaDanhMuc == maloai).Select(x=>x.TenDanhMuc).FirstOrDefault();
+            return View(pagedList);
 
         }
 
-        public ActionResult gioithieu()
+        public async Task<IActionResult> chitietsanpham(int masanpham)
+        {
+            var sanpham = await _context.SanPhams.SingleOrDefaultAsync(x => x.MaSanPham == masanpham);
+
+            if (sanpham == null)
+            {
+                return RedirectToAction("ProductNotFound");
+            }
+
+            return View(sanpham);
+        }
+
+
+        public IActionResult gioithieu()
         {
            
             return View();
         }
 
-        public ActionResult lienhe() {
+        public IActionResult lienhe() {
 
             return View();
         }
 
-        public ActionResult thanhtoan()
+        public IActionResult thanhtoan()
         {
             return View();
         }
 
-        public ActionResult dangnhap()
+        public IActionResult dangnhap()
         {
             return View();
         }
 
-        public ActionResult dangky()
+        public IActionResult dangky()
         {
             return View();
         }
 
-        public ActionResult quenmatkhau() {
+        public IActionResult quenmatkhau() {
             return View();
         }
 
-        public ActionResult xacnhanemail()
+        public IActionResult xacnhanemail()
         {
             return View();
         }
 
-        public ActionResult matkhaumoi()
+        public IActionResult matkhaumoi()
         {
             return View();
         }
