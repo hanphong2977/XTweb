@@ -3,8 +3,9 @@
 
 .Admin-area {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 20% 80%;
     /*grid-gap: 10px;*/
+    overflow-y:auto;
 }
 
 .slidebar {
@@ -18,10 +19,6 @@
     display: flex;
     grid-column: 1;
 }
-    .slidebar h2 {
-        justify-content: left;
-        width: 1130px;
-    }
 
     .slidebar ul {
         padding-left: 55px;
@@ -114,13 +111,16 @@
 
 .content-table {
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 5px auto;
     font-size: 1em;
-    min-width: 1000px;
+    min-width: 1200px;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    justify-content:center;
+    padding-top:5px;
 }
-
+.content-table tbody{
+}
     .content-table thead tr {
         background-color: #ad9552;
         color: #ffffff;
@@ -240,10 +240,6 @@ header .image-text .header-text {
         background-size: cover;
         background-position: center;
     }
-.slidebar.close h2 {
-    justify-content: left;
-    width:1260px;
-}
 body {
     height: 100vh;
     transition: all 0.4s ease;
@@ -265,11 +261,16 @@ body {
 .slidebar header {
     position: relative;
 }
-.admin-nav {
+.admin_nav {
     grid-column: 2;
-    overflow-y:auto;
 }
-.admin-nav.close{
-    margin-left:100px;
+
+.admin_nav h2 {
+    text-align:left;
+    width:100%;
+    margin-bottom:5px;
 }
+    .admin_nav.close {
+        margin-left:-120px;
+    }
 
