@@ -12,11 +12,36 @@
 </div>
 <Section class="contact_section">
     <div class="container"> 
-           
-     
-        <div class="row mt-5">
-            <img style="" src="../image/ggmap.PNG" alt="">
+        <div class="align-items-center  mt-5 ">
+            <div class="text-center">
+                <h2>LIÊN HỆ CHÚNG TÔI </h2>
+            </div>
         </div>
+        <style>
+            #map {
+                height: 700px;
+                width: 100%;
+            }
+        </style>
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var myLatLng = { lat: 10.765527935166421, lng: 106.68877328329691 };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 20,
+                    center: myLatLng
+                });
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Hello World!'
+                });
+            }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByEauqcXbCj74bedteqgHEjscVoEy2A1Y&callback=initMap"
+                async defer>
+        </script>
 
         <div class="mt-5 mb-5">
             <h3 style="font-size: 27px;"><strong>Phản hồi </strong></h3>

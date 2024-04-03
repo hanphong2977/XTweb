@@ -71,19 +71,19 @@
                     <p>Những nhân viên cắt tóc được vinh danh trong tháng</p>
                 </div>
             </div>
-            <div class="row justify-content-center">
-
-                @foreach (var item in Model.DanhSachNhanVien)
-                {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <img src="@item.AnhNhanVien" class="staff_img_style" alt="..." />
-                            <div class="staff_name_title">
-                                <p class="staff_name_title_text">@item.TenNhanVien</p>
+            <div class="image_slide scroller" data-animated="true">
+                    @foreach (var item in Model.DanhSachNhanVien)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <img src="@item.AnhNhanVien" class="staff_img_style" alt="..." />
+                                <div class="staff_name_title">
+                                    <p class="staff_name_title_text">@item.TenNhanVien</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>

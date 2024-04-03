@@ -3,10 +3,10 @@
 
 .Admin-area {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 10% 90%;
     /*grid-gap: 10px;*/
-}
 
+}
 .slidebar {
     position: fixed;
     top: 0;
@@ -265,11 +265,11 @@ body {
 .slidebar header {
     position: relative;
 }
-.admin-nav {
+.admin_nav {
     grid-column: 2;
-    overflow-y:auto;
+    
 }
-.admin-nav.close{
-    margin-left:100px;
+.admin_nav.close{
+    margin-right:150px;
 }
 

@@ -54,7 +54,7 @@
 }
 
 .card {
-    position: relative;
+ 
     width: 390px;
     height: 500px;
     border-radius: 5px;
@@ -596,3 +596,39 @@ input {
     text-align: center;
 }
 
+/*Image slide*/
+.image_slide {
+    display: flex ;
+    position: relative;
+    height: 600px;
+}
+
+.scroller[data-animated="true"] {
+    overflow-x: auto;
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+.scroller[data-animated="true"] .card {
+        animation: scroll 5s linear infinite;
+        width: max-content;
+}
+
+.image_slide::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+.image_slide::-webkit-scrollbar-track {
+    background: #d7cccc;
+}
+
+.image_slide::-webkit-scrollbar-thumb {
+    background: linear-gradient(blanchedalmond,#ad9551 );
+    border-radius: 10px;
+}
+
+@keyframes scroll {
+    to {
+        transform: translate(calc(-50% - 0.5rem));
+    }
+}
