@@ -12,6 +12,4 @@ public partial class DichVu
     public double Gia { get; set; }
 
     public string? AnhDichVu { get; set; }
-
-    public virtual ICollection<LichHen> LichHens { get; set; } = new List<LichHen>();
 }

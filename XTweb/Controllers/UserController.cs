@@ -10,19 +10,27 @@ namespace XTBarber.Controllers
     {
         private readonly ISanPhamRepository _sanPhamRepository;
         private readonly ILoaiSanPhamRepository _loaiSanPhamRepository;
-        public UserController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository)
+        private readonly ILichHenRepository _lichHenRepository;
+        private readonly IDichVuRepository _dichVuRepository;
+        private readonly INhanVienRepository _nhanVienRepository;
+        public UserController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository, 
+            ILichHenRepository lichHenRepository, INhanVienRepository nhanVienRepository, IDichVuRepository dichVuRepository)
         {
             _sanPhamRepository = sanPhamRepository;
             _loaiSanPhamRepository = loaiSanPhamRepository;
+            _lichHenRepository = lichHenRepository;
+            _nhanVienRepository = nhanVienRepository;
+            _dichVuRepository = dichVuRepository;
         }
         XuanTamDbContext _context = new XuanTamDbContext();
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = new IndexViewModel
             {
-                DanhSachDichVu = _context.DichVus.ToList(),
-                DanhSachNhanVien = _context.NhanViens.ToList(),
+                DanhSachDichVu = await _dichVuRepository.GetAllAsync(),
+                DanhSachNhanVien = await _nhanVienRepository.GetAllAsync(),
+                LichHen = await _lichHenRepository.GetAllAsync()
             };
 
             return View(model);
@@ -42,18 +50,15 @@ namespace XTBarber.Controllers
 
         }
 
-        public async Task<IActionResult> chitietsanpham(int masanpham)
+        public async Task<IActionResult> chitietsanpham(int id)
         {
-            var sanpham = await _context.SanPhams.SingleOrDefaultAsync(x => x.MaSanPham == masanpham);
-
-            if (sanpham == null)
+            var product = await _sanPhamRepository.GetByIdAsync(id);
+            if (product == null)
             {
-                return RedirectToAction("ProductNotFound");
+                return NotFound();
             }
-
-            return View(sanpham);
+            return View(product);
         }
-
 
         public IActionResult gioithieu()
         {

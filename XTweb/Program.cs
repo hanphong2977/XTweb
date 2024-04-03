@@ -11,6 +11,10 @@ builder.Services.AddDbContext<XuanTamDbContext>(options => options.UseSqlServer(
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ILoaiSanPhamRepository, LoaiSanPhamRepository>();
 builder.Services.AddScoped<ISanPhamRepository, SanPhamRepository>();
+builder.Services.AddScoped<IDichVuRepository, DichVuRepository>();
+builder.Services.AddScoped<ILichHenRepository, LichHenRepository>();
+builder.Services.AddScoped<INhanVienRepository, NhanVienRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
