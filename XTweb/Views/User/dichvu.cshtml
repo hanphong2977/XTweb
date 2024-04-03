@@ -28,7 +28,7 @@
                         <h2 class="card__title" style="color: CaptionText">@item.TenSanPham</h2>
                         <div class="mt-3">
                             <strong style="color: red; margin-right:100px">Giá: @item.Gia</strong>
-                            <a asp-controller="User" asp-action="chitietsanpham" asp-route-masp="@item.MaSanPham" class="card__button"></a>
+                            <a asp-controller="User" asp-action="chitietsanpham" asp-route-id="@item.MaSanPham" class="card__button"></a>
                         </div>
                     </div>
                 </article>

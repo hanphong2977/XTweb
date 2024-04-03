@@ -17,7 +17,7 @@ public partial class SanPham
 
     public int MaDanhMuc { get; set; }
 
-    public string HinhAnh { get; set; } = null!;
+    public string? HinhAnh { get; set; }
 
     public virtual ICollection<HoaDonSanPham> HoaDonSanPhams { get; set; } = new List<HoaDonSanPham>();
 

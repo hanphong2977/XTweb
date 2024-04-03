@@ -19,6 +19,8 @@ public partial class XuanTamDbContext : DbContext
 
     public virtual DbSet<DichVu> DichVus { get; set; }
 
+    public virtual DbSet<DichVuLichHen> DichVuLichHens { get; set; }
+
     public virtual DbSet<HoaDonDichVu> HoaDonDichVus { get; set; }
 
     public virtual DbSet<HoaDonSanPham> HoaDonSanPhams { get; set; }
@@ -53,6 +55,23 @@ public partial class XuanTamDbContext : DbContext
 
             entity.Property(e => e.AnhDichVu).IsUnicode(false);
             entity.Property(e => e.TenDichVu).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<DichVuLichHen>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("DichVu_LichHen");
+
+            entity.HasOne(d => d.IdDichVuNavigation).WithMany()
+                .HasForeignKey(d => d.IdDichVu)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DichVu_LichHen_DichVu");
+
+            entity.HasOne(d => d.IdLichHenNavigation).WithMany()
+                .HasForeignKey(d => d.IdLichHen)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DichVu_LichHen_LichHen");
         });
 
         modelBuilder.Entity<HoaDonDichVu>(entity =>
@@ -94,9 +113,6 @@ public partial class XuanTamDbContext : DbContext
 
             entity.ToTable("KhachHang");
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(80)
-                .IsUnicode(false);
             entity.Property(e => e.HoTen).HasMaxLength(250);
             entity.Property(e => e.MatKhau)
                 .HasMaxLength(10)
@@ -116,20 +132,10 @@ public partial class XuanTamDbContext : DbContext
 
             entity.Property(e => e.NgayHen).HasColumnType("datetime");
 
-            entity.HasOne(d => d.MaDichVuNavigation).WithMany(p => p.LichHens)
-                .HasForeignKey(d => d.MaDichVu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_LichHen_DichVu");
-
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.LichHens)
                 .HasForeignKey(d => d.MaKhachHang)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_LichHen_KhachHang");
-
-            entity.HasOne(d => d.MaNhanVienNavigation).WithMany(p => p.LichHens)
-                .HasForeignKey(d => d.MaNhanVien)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_LichHen_NhanVien");
         });
 
         modelBuilder.Entity<NhanVien>(entity =>
@@ -161,10 +167,7 @@ public partial class XuanTamDbContext : DbContext
 
             entity.ToTable("SanPham");
 
-            entity.Property(e => e.HinhAnh)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .IsFixedLength();
+            entity.Property(e => e.HinhAnh).IsUnicode(false);
             entity.Property(e => e.TenSanPham).HasMaxLength(50);
 
             entity.HasOne(d => d.MaDanhMucNavigation).WithMany(p => p.SanPhams)

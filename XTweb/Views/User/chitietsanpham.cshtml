@@ -1,68 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "chitietsanpham";
+    ViewData["Title"] = "chitietdichvu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model XTweb.Models.SanPham
-<h2>Chi Tiết Sản Phẩm</h2>
+<!--banner -->
+<div class="slider mt-5">
+    <div class="slider-height d-flex align-items-center justify-content-center">
+        <div class="herocap">
+            <h2 style="font-size: 50px; font-weight:700; color: #fff">Chi Tiết Sản Phẩm </h2>
+        </div>
+    </div>
+</div>
 <!--Chi Tiet San Pham-->
-<section class="mt-5">
-    <div class="container">
-        <div class="Product-detail">
-            <div class="Product-item">
-                <div class="col">
-                    <input class="imgdetail" type="image" src="@Model.HinhAnh" alt="">
+<div class="container-fluid">
+    <div class="Product-detail">
+        <div class="Product-item">
+            <div class="col">
+                <img class="imgdetail" src="@Model.HinhAnh" />
+            </div>
+        </div>
+        <div class="title">
+            <div class="col">
+                <div class="title_read">
+                    <h2 style=" color:black; padding-left:0;"> <strong>@Model.TenSanPham</strong> </h2>
                 </div>
             </div>
-            <div class="title">
+            <div style="margin-top: 10px">
+                <div class="price">
+                    @Model.Gia
+                </div>
+            </div>
+            <!-- Mo ta-->
+            <div>
+                <h3 class="h3_sp">Mô tả sản phẩm</h3>
+                <textarea readonly style="width: 550px; overflow-y:auto;border:1px solid #ad9551;border-radius:5px;" id="MoTaTextarea" cols="30"
+                          rows="9">@Model.MoTaSanPham </textarea>
+            </div>
+            <!--Loai hang-->
+            <div style="margin-top:20px;">
                 <div class="col">
-                    <div class="title_read">
-                        <img src="../wwwroot/image/shopping-cart.png" alt="">
-                        @* <input style="margin-left: 0; border:#f5f5f5" type="text" name="@Model.TenSanPham" id="titleProduct"> *@
+                    <div class="type">
+                        <h3 class="h3_sp">Loại</h3>
+                        <div class="button_number" style="width:107px; display: inline-block;">@Model.MaDanhMucNavigation?.TenDanhMuc</div>
                     </div>
                 </div>
-                <div style="margin-top: 10px">
-                    @* <div class="price">
-                        @Model.Gia
-                    </div> *@
+            </div>
+            <!--So luong-->
+            <div class="col" style="margin-bottom: 25px;">
+                <div class="number">
+                    <h3 class="h3_sp">Số lượng</h3>
+                    <div class="button_number">@Model.SoLuong</div>
                 </div>
-                <!-- Mo ta-->
-                <div>
-                    <h3 class="h3_sp">Mô tả sản phẩm</h3>
-                    @* <textarea readonly style="width: 550px; overflow-y:hidden" name="@Model.MoTaSanPham " id="MoTaTextarea" cols="30"
-                              rows="9"></textarea> *@
-                </div>
-                <!--Loai hang-->
-                <div style="margin-top:20px;">
-                    <div class="col">
-                        <div class="type">
-                            <h3 class="h3_sp">Loại</h3>
-                            @* <input style="width:107px; display: inline-block;" type="text" name="@Model.MaDanhMucNavigation?.TenDanhMuc"
-                                   id="LoaiHang"> *@
-                        </div>
-                    </div>
-                </div>
-                <!--So luong-->
-                <div class="col" style="margin-bottom: 25px;">
-                    <div class="number">
-                        <h3 class="h3_sp">Số lượng</h3>
-                        @* <input class="button_number" min="1" value="1" type="number" name="@Model.SoLuong" id=""> *@
-                    </div>
-                </div>
-                <!--Button mua-->
-                <div class="col">
-                    <div class="number">
-                        <button class="button_add_buy">
-                            <div class="col">
-                                <div class="button_justify">
-                                    <img src="./img/btn_shopping.png" alt=""> Thêm vào giỏ hàng
-                                </div>
+            </div>
+            <!--Button mua-->
+            <div class="col">
+                <div class="number">
+                    <button class="button_add_buy">
+                        <div class="col">
+                            <div class="button_justify">
+                                <i style="color:red;" class="fi fi-sr-shopping-cart-add"></i> Thêm vào giỏ hàng
                             </div>
-                        </button>
-                        <button class="button_buy">Mua ngay</button>
-                    </div>
+                        </div>
+                    </button>
+                    <button class="button_buy">
+                        <div class="col">
+                            <div class="button_justify">
+                                <i style="color:white;margin-left:40px;" class="fi fi-sr-cart-shopping-fast"></i>
+                                <span style="margin-left:5px;">Mua ngay</span>
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
