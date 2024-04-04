@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using XTweb.Models;
@@ -24,15 +26,47 @@ namespace XTBarber.Controllers
         }
         XuanTamDbContext _context = new XuanTamDbContext();
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
+            int pageSize = 6;
+            int pageNumber = page == null || pageSize < 1 ? 1 : page.Value;
+            var lstDichVu = await _dichVuRepository.GetAllAsync();
+            PagedList<DichVu> pagedList = new PagedList<DichVu>(lstDichVu ,pageNumber, pageSize);
+            var lichhenviewmodels = new LichHenViewModel();
+            var nhanViens = await _nhanVienRepository.GetAllAsync();
             var model = new IndexViewModel
             {
                 DanhSachDichVu = await _dichVuRepository.GetAllAsync(),
                 DanhSachNhanVien = await _nhanVienRepository.GetAllAsync(),
-                LichHen = await _lichHenRepository.GetAllAsync()
+                LichHen = await _lichHenRepository.GetAllAsync(),
+                pagelstDichVu = pagedList,
+                LichHenViewModel = lichhenviewmodels,
             };
-
+            ViewBag.DichVu = new SelectList(lstDichVu, "MaDichVu", "TenDichVu");
+            ViewBag.NhanVien = new SelectList(nhanViens, "MaNhanVien", "TenNhanVien");
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddLichHen(LichHenViewModel model)
+        {
+            var khachhang = _context.KhachHangs.Where(x => x.Sdt == model.CustomerPhone).FirstOrDefault();
+            if (khachhang == null)
+            {
+                return View("dangky");
+            }
+            if (ModelState.IsValid)
+            {
+                LichHen lichhen = new LichHen
+                {
+                    MaKhachHang = Convert.ToInt32(khachhang.MaKhachHang),
+                    MaDichVu = model.SelectedDichVuId,
+                    MaNhanVien = model.SelectedNhanVienId,
+                    NgayHen = model.NgayHen,
+                };
+                await _lichHenRepository.AddAsync(lichhen);
+                return RedirectToAction("ThanhToan");
+            }
+            // Nếu ModelState không hợp lệ, hiển thị form với dữ liệu đã nhập
             return View(model);
         }
 

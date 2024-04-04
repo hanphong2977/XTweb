@@ -11,7 +11,15 @@ public partial class LichHen
 
     public DateTime NgayHen { get; set; }
 
+    public int MaDichVu { get; set; }
+
+    public int MaNhanVien { get; set; }
+
     public virtual ICollection<HoaDonDichVu> HoaDonDichVus { get; set; } = new List<HoaDonDichVu>();
 
+    public virtual DichVu MaDichVuNavigation { get; set; } = null!;
+
     public virtual KhachHang MaKhachHangNavigation { get; set; } = null!;
+
+    public virtual NhanVien MaNhanVienNavigation { get; set; } = null!;
 }
