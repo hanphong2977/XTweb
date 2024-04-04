@@ -19,6 +19,11 @@
             width: 100%;
             z-index: 1000;
         }
+
+        #map {
+            height: 700px;
+            width: 100%;
+        }
     </style>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/chitietdichvu.css" />
@@ -82,8 +87,9 @@
 
     <div>
         @RenderBody()
+        
     </div>
-
+    <button id="scrollToTopBtn" class="scrollToTopBtn" hidden ><i class="fi fi-sr-up"></i></button>
     <!-- footer -->
     <footer id="lienhe">
         <div class="footer-area section-bg"
@@ -206,5 +212,44 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
     <script src="~/js/app.js"></script>
+    <script>
+        function initMap() {
+            var myLatLng = { lat: 10.765527935166421, lng: 106.68877328329691 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 20,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByEauqcXbCj74bedteqgHEjscVoEy2A1Y&callback=initMap"
+            async defer>
+    </script>
+    <script>
+        const btnScrollOnTop = document.getElementById('scrollToTopBtn')
+        const docEl = document.documentElement
+
+        document.addEventListener('scroll', () => { 
+            const scrollToTal = docEl.scrollHeight - docEl.clientHeight
+             
+            if ((docEl.scrollTop / scrollToTal) >= 0.1) {
+                btnScrollOnTop.hidden = false
+            } else {
+                btnScrollOnTop.hidden = true
+            }
+        })
+
+        btnScrollOnTop.addEventListener('click', () =>{
+            docEl.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            })
+        })
+    </script>
 </body>
 </html>

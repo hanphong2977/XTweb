@@ -1,4 +1,5 @@
-﻿@{
+﻿@using X.PagedList.Mvc.Core
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Index";
 }
@@ -63,7 +64,7 @@
 
 <!-- Nhân Viên -->
 
-<div class="team-area pb180" id="nhanvien">
+<div class="team-area" id="nhanvien">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8 col-lg-8 col-md">
@@ -72,18 +73,7 @@
                     <p>Những nhân viên cắt tóc được vinh danh trong tháng</p>
                 </div>
             </div>
-                <div class="image_slide scroller" data-animated="true">
-                    @foreach (var item in Model.DanhSachNhanVien)
-                    {
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="@item.AnhNhanVien" class="staff_img_style" alt="..." />
-                                <div class="staff_name_title">
-                                    <p class="staff_name_title_text">@item.TenNhanVien</p>
-                                </div>
-                            </div>
-                        </div>
-                    }
+            <div class="image_slide scroller" data-animated="true">
                 @foreach (var item in Model.DanhSachNhanVien)
                 {
                     <div class="col-lg-4 col-md-6">
@@ -95,7 +85,7 @@
                         </div>
                     </div>
                 }
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -103,85 +93,91 @@
 
 
 
-<div class="service_area" id="dichvu">
-    <div class="container" style="border: 2px solid #ad9551; border-radius: 10px">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-10">
-                <div class="section_title text-center mb-5 mt-5">
-                    <h3><strong>Các Dịch Vụ</strong></h3>
-                    <p>
-                        Ở đây chúng tôi cung cấp cho bạn các dịch vụ có chất lượng
-                        tốt nhất
-                    </p>
-                </div>
+<section class="service_area" id="dichvu">
+    <div class="container justify-content-center prices_area" style="border: 2px solid #ad9551; border-radius: 10px;padding-bottom:10px;" id="banggia">
+        <div class=" pt-5" style="margin:0 auto;">
+            <div class="section_title text-center mb-5 mt-5" >
+                <h3><strong>Các Dịch Vụ</strong></h3>
+                <p>
+                    Ở đây chúng tôi cung cấp cho bạn các dịch vụ có chất lượng
+                    tốt nhất
+                </p>
             </div>
-            <div class="prices_area" id="banggia">
-                <div class="banggia_container pt-5 pb-0 mb-0">
-                    @foreach (var item in Model.DanhSachDichVu)
-                    {
-                        <div class="icon_title">
-                            <div style="
+            <div class="banggia_container">
+
+                @foreach (var item in Model.pagelstDichVu)
+                {
+                    <article class="icon_title">
+                        <div style="
                                     width: 90px;
                                     height: 90px;
                                     border: 1px solid black;
                                     border-radius: 80px;
                                     display: flex;
-                                    align-items: center;
-                                    justify-items: center;
-                                    justify-content: center;
-                                                  ">
-                                <img class="icon_banggia" src="@item.AnhDichVu" alt="hottoc" />
-                            </div>
-                            <div class="title_banggia mt-4" style="text-align: center">
-                                <h6>@item.TenDichVu</h6>
-                                <span style="text-align: center">@item.Gia</span>
-                            </div>
+                                    margin:0 auto;
+                                                                              ">
+                            <img class="icon_banggia" src="@item.AnhDichVu" alt="hottoc" />
                         </div>
-                    }
-                </div>
+                        <div class="title_banggia mt-4" style="text-align: center">
+                            <h6>@item.TenDichVu</h6>
+                            <span style="text-align: center">@item.Gia</span>
+                        </div>
+                    </article>
+
+                }
+
             </div>
+
+        </div>
+        <div class="pagination-1">
+            @Html.PagedListPager(Model.pagelstDichVu, page => Url.Action("Index", new { page = page }) + "#dichvu")
         </div>
     </div>
-</div>
+</section>
 
 <!-- Đặt Lịch -->
 <div class="booking_area" id="datlich">
     <div class="booking_form">
-        <form class="form_datlich">
+        <form class="form_datlich" asp-action="AddLichHen" asp-controller="User" method="post">
             <div class="to">
                 <h2 style="font-family: Oswald; font-size: 50px; font-weight: 400; text-align:center; margin-top:10px"><b>Đặt lịch ngay</b></h2>
                 <label style="margin-left:0 auto; margin-top: 3px;">Họ và tên</label>
-                <input type="text" id="name" name="customername" required="">
+                <input type="text" id="customername" name="CustomerName" required>
+                @Html.ValidationMessageFor(model => model.LichHenViewModel.CustomerName)
                 <label style="margin-left: 0 auto">Số điện thoại</label>
-                <input type="tel" id="phone" name="customerphone" required="">
+                <input type="tel" id="customerphone" name="CustomerPhone" required>
+                @Html.ValidationMessageFor(model => model.LichHenViewModel.CustomerPhone)
                 <label style="margin-left: 0 auto">Ngày giờ hẹn</label>
-                <input type="datetime-local" min="2024-3-17" max="2024-4-30" id="date" name="datetime" required="">
-                <label style="margin-left:0 auto">Chọn dịch vụ</label>
-                <br>
-                <div class="row">
-                    <div class="col-6">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Cắt - Gội</label>
-                        <input style="margin-right: 10px;  margin-top: -25px; margin-bottom:10px; " type="checkbox" id="catgoi" value="" name="dichvu">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Uốn</label>
-                        <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Uon" value="" name="dichvu">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Phục hồi</label>
-                        <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Phuchoi" value="" name="dichvu">
-                    </div>
-                    <div class="col-6">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Tẩy tóc</label>
-                        <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Taytoc" value="" name="dichvu">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Tẩy da chết</label>
-                        <input style="margin-right: 10px; margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Taydachet" value="" name="dichvu">
-                        <label style="margin-left: 112.5px; margin-top: 20px;">Nhuộm</label>
-                        <input style="margin-right: 10px;margin-top: -25px; margin-bottom:10px; " type="checkbox" id="Nhuom" value="" name="dichvu">
-                    </div>
+                <input type="datetime-local" id="date" name="NgayHen" required>
+                @Html.ValidationMessageFor(model => model.LichHenViewModel.NgayHen)
+                <label style="margin-left:0 auto; margin-top: 3px;">Dich Vụ</label>
+                <div style="    background-color: transparent;
+                                display: block;
+                                margin-left: 112.5px;
+                                width: 70%;
+                                border: none;
+                                outline-style: none;
+                                border-bottom: 2px solid #ad9551;" class="form-group">
+                    
+                    <select style="width:100%;padding:0px;font-size: 20px;" name="SelectedDichVuId" asp-items="ViewBag.DichVu" class="form-control"></select>
+                    @Html.ValidationMessageFor(model => model.LichHenViewModel.SelectedDichVuId)
                 </div>
+                <label style="margin-left:0 auto; margin-top: 3px;">Barber</label>
+                <div style="    background-color: transparent;
+                                display: block;
+                                margin-left: 112.5px;
+                                width: 70%;
+                                border: none;
 
+                                outline-style: none;
+                                border-bottom: 2px solid #ad9551;" class="form-group">
 
-
+                    <select style="width:100%;padding:0px;font-size: 20px;" name="SelectedNhanVienId" asp-items="ViewBag.NhanVien" class="form-control" required></select>
+                    @Html.ValidationMessageFor(model => model.LichHenViewModel.SelectedNhanVienId)
+                </div>
                 <br>
-                <button class="submit">
-                    <nav> <a style="text-decoration: none; color: white;"  aria-current="page" asp-controller="User" asp-action="thanhtoan">Gửi</a></nav>
+                <button type="submit" class="submit">
+                    <nav> <a style="text-decoration: none; color: white;" aria-current="page" asp-controller="User" asp-action="thanhtoan">Gửi</a></nav>
                 </button>
             </div>
         </form>

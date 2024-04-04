@@ -132,10 +132,20 @@ public partial class XuanTamDbContext : DbContext
 
             entity.Property(e => e.NgayHen).HasColumnType("datetime");
 
+            entity.HasOne(d => d.MaDichVuNavigation).WithMany(p => p.LichHens)
+                .HasForeignKey(d => d.MaDichVu)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LichHen_DichVu");
+
             entity.HasOne(d => d.MaKhachHangNavigation).WithMany(p => p.LichHens)
                 .HasForeignKey(d => d.MaKhachHang)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_LichHen_KhachHang");
+
+            entity.HasOne(d => d.MaNhanVienNavigation).WithMany(p => p.LichHens)
+                .HasForeignKey(d => d.MaNhanVien)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LichHen_NhanVien");
         });
 
         modelBuilder.Entity<NhanVien>(entity =>
