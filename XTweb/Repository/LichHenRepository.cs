@@ -25,18 +25,12 @@ namespace XTweb.Repository
 
         public async Task<IEnumerable<LichHen>> GetAllAsync()
         {
-            return await _context.LichHens.Include(p => p.MaNhanVienNavigation)
-                                            .Include(p =>p.MaDichVuNavigation)
-                                            .Include(p =>p.MaKhachHangNavigation)
-                                            .ToListAsync();
+            return await _context.LichHens.ToListAsync();
         }
 
         public async Task<LichHen> GetByIdAsync(int id)
         {
-            return await _context.LichHens.Include(p => p.MaNhanVienNavigation)
-                                            .Include(p => p.MaDichVuNavigation)
-                                            .Include(p => p.MaKhachHangNavigation)
-                                            .FirstOrDefaultAsync(p => p.MaLichHen == id);
+            return await _context.LichHens.FirstOrDefaultAsync(p => p.MaLichHen == id);
         }
 
         public async Task UpdateAsync(LichHen lichhen)

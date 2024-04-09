@@ -31,7 +31,7 @@ namespace XTweb.Repository
 
         public async Task<NhanVien> GetByIdAsync(int id)
         {
-            return await _context.NhanViens.FirstOrDefaultAsync(p => p.MaNhanVien == id);
+            return await _context.NhanViens.Include(p => p.TenNhanVien).FirstOrDefaultAsync(p => p.MaNhanVien == id);
         }
 
         public async Task UpdateAsync(NhanVien nhanvien)

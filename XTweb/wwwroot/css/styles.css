@@ -105,7 +105,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow:auto;
 
 }
 /*lich hen*/
@@ -275,17 +274,3 @@ body {
         margin-left:-120px;
     }
 
-.container-view {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 10px;
-}
-
-.left-site {
-    grid-column: 1;
-}
-
-.right-site {
-    display: flex;
-    grid-column: 2;
-}

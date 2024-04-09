@@ -29,15 +29,14 @@ namespace XTweb.Repository
             return await _context.KhachHangs.ToListAsync();
         }
 
-        public async Task<KhachHang> GetByIdAsync(int id)
+        public Task<KhachHang> GetByIdAsync(int id)
         {
-            return await _context.KhachHangs.FirstOrDefaultAsync(x => x.MaKhachHang == id);
+            throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(KhachHang khachhang)
+        public Task UpdateAsync(KhachHang khachhang)
         {
-            _context.KhachHangs.Update(khachhang);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }
