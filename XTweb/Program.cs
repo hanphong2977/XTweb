@@ -1,4 +1,5 @@
 
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using XTweb.Models;
 using XTweb.Repository;
@@ -15,6 +16,7 @@ builder.Services.AddScoped<IDichVuRepository, DichVuRepository>();
 builder.Services.AddScoped<ILichHenRepository, LichHenRepository>();
 builder.Services.AddScoped<INhanVienRepository, NhanVienRepository>();
 builder.Services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+builder.Services.AddScoped<IHoaDonDichVuRepository, HoaDonDichVuRepository>();
 
 var app = builder.Build();
 
@@ -32,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Index}/{id?}");
+    pattern: "{controller=User}/{action=Index}/{id?}");;
 
 app.Run();
