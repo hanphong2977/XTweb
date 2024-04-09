@@ -1,0 +1,14 @@
+﻿@model XTweb.Models.NhanVien
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Xóa Nhân Viên</h2>
+<form asp-action="DeleteNhanVienConfirmed" method="post">
+    <input type="hidden" asp-for="MaNhanVien" />
+    <p>Bạn có muốn xóa nhân viên @Model.TenNhanVien?</p>
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" asp-controller="Admin" class="btn btn-primary">Back</a>
+    </div>
+
+</form>

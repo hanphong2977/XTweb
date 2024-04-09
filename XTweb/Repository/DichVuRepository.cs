@@ -31,7 +31,7 @@ namespace XTweb.Repository
 
         public async Task<DichVu> GetByIdAsync(int id)
         {
-            return await _context.DichVus.Include(p => p.TenDichVu).FirstOrDefaultAsync(p => p.MaDichVu == id);
+            return await _context.DichVus.FirstOrDefaultAsync(p => p.MaDichVu == id);
         }
 
         public async Task UpdateAsync(DichVu dichvu)

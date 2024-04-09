@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model XTweb.Models.NhanVien
+<h2>Chi Tiết Nhân Viên</h2>
+<h4>@Model.TenNhanVien</h4>
+<hr />
+<div class="container-view">
+    <div class="left-site">
+        <div>
+            @if (!string.IsNullOrEmpty(Model.AnhNhanVien))
+            {
+                <img src="@Model.AnhNhanVien" alt="Product Image" style="max-width: 450px;max-height:400px;" />
+            }
+        </div>
+
+        
+    </div>
+    <div action="right-site">
+        <p> <b>Họ Tên:</b> @Model.TenNhanVien</p>
+        <p> <b>Địa Chỉ:</b> @Model.DiaChi</p>
+        <p> <b>Email:</b> @Model.Email</p>
+        <p> <b>SĐT:</b> @Model.Sdt</p>
+        <div>
+            <a asp-action="UpdateNhanVien" asp-controller="Admin" asp-route-id="@Model.MaNhanVien" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" asp-controller="Admin" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
