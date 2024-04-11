@@ -27,15 +27,13 @@ namespace XTweb.Repository
             await _context.SaveChangesAsync();
         }
 
+       
         public async Task<IEnumerable<KhachHang>> GetAllAsync()
         {
             return await _context.KhachHangs.ToListAsync();
         }
 
-        public async Task<KhachHang> GetByIdAsync(string sdt)
-        {
-            return await _context.KhachHangs.FindAsync(sdt);
-        }
+  
 
         public Task UpdateAsync(KhachHang khachhang)
         {
@@ -44,6 +42,16 @@ namespace XTweb.Repository
         public bool checkSDT (string sdt)
         {
             return _context.KhachHangs.Count(t=> t.Sdt ==  sdt)>0;
+        }
+
+        public Task<KhachHang> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<KhachHang> GetBySdtAsync(string sdt)
+        {
+            return await _context.KhachHangs.FindAsync(sdt);
         }
     }
 }
