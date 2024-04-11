@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var isLoggedIn = HttpContextAccessor.HttpContext.Session.GetString("sdt") != null;
+
+}
+
+@if (isLoggedIn)
+{
+    <text>
+        <span class="nav-link text-light"> Welcome, @HttpContextAccessor.HttpContext.Session.GetString("sdt")</span>
+        <span class="nav-item text-light">
+           
+            <form asp-asp-controller="User" asp-action="dangxuat" method="post">
+                <button type="submit" class="btn btn-link text-light text-decoration-none" style="text-decoration:none">Đăng Xuất</button>
+            </form>
+           
+           </span>
+    </text>
+}
+else
+{
+    <text>
+        <a asp-asp-controller="User" asp-action="dangnhap" class=" btn btn-link text-light text-decoration-none">Đăng nhập</a>
+    </text>
+}

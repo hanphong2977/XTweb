@@ -11,6 +11,9 @@ namespace XTweb.Repository
         {
             _context = context;
         }
+
+     
+
         public async Task AddAsync(KhachHang khachhang)
         {
             _context.KhachHangs.Add(khachhang);
@@ -29,14 +32,18 @@ namespace XTweb.Repository
             return await _context.KhachHangs.ToListAsync();
         }
 
-        public Task<KhachHang> GetByIdAsync(int id)
+        public async Task<KhachHang> GetByIdAsync(string sdt)
         {
-            throw new NotImplementedException();
+            return await _context.KhachHangs.FindAsync(sdt);
         }
 
         public Task UpdateAsync(KhachHang khachhang)
         {
             throw new NotImplementedException();
+        }
+        public bool checkSDT (string sdt)
+        {
+            return _context.KhachHangs.Count(t=> t.Sdt ==  sdt)>0;
         }
     }
 }

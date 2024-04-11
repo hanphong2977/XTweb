@@ -1,5 +1,5 @@
-﻿
-  @{
+﻿@model XTweb.Models.LoginModel
+@{
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
@@ -21,14 +21,18 @@
 
     <section class="login-area">
         <div class="wrapeer">
-            <form action="">
+            <form asp-action="dangnhap" asp-controller="User" method="post">
                 <h2>Đăng Nhập</h2>
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Success</div>
+                }
                 <div class="input-box">
-                    <input type="tel" placeholder="Số Điện Thoại" required>
+                    <input asp-for="sdt" type="tel" placeholder="Số Điện Thoại" required>
                     <i class='bx bx-phone'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Mật Khẩu" required>
+                    <input asp-for="password" type="password" placeholder="Mật Khẩu" required>
                     <i class='bx bx-lock-alt'></i>
                 </div>
                 <div class="remenber-forgot">
@@ -38,7 +42,7 @@
 
                 <button type="submit" class="btn">Đăng Nhập</button>
                 <div class="register-link">
-                    <p>Bạn Chưa Có Tài Khoản? <a aria-current="page" asp-controller="User" asp-action="dangky">Đăng Ký Ngay</a> </p>
+                    <p>Bạn Chưa Có Tài Khoản? <a aria-current="page" asp-controller="Access" asp-action="dangky">Đăng Ký Ngay</a> </p>
                 </div>
             </form>
         </div>
