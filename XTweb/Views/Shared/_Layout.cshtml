@@ -14,6 +14,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.3.0/uicons-brands/css/uicons-brands.css'>
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/2.3.0/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+    <link rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/2.3.0/uicons-regular-straight/css/uicons-regular-straight.css" />
     <style>
         .navbar {
             position: fixed;
@@ -58,20 +63,6 @@
                             <a class="nav-link text-light" aria-current="page" asp-controller="User" asp-action="gioithieu"><b>Giới Thiệu</b> </a>
                         </li>
                         @await Component.InvokeAsync("LoaiSpMenu")
-                        @* <li class="nav-item dropdown px-4">
-                            <a class="nav-link dropdown-toggle text-light" aria-current="page" asp-controller="User" asp-action="dichvu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <b>Sản Phẩm</b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> *@
-@*                         <li class="nav-item px-4">
-                            <a class="nav-link text-light" aria-current="page" asp-controller="User" asp-action="dichvu"><b>Sản Phẩm</b></a>
-                        </li> *@
                         <li class="nav-item px-4">
                             <a class="nav-link text-light" aria-current="page" asp-controller="User" asp-action="lienhe"><b>Liên Hệ</b></a>
                         </li>
@@ -86,9 +77,57 @@
 
     <div>
         @RenderBody()
-        
+
     </div>
-    <button id="scrollToTopBtn" class="scrollToTopBtn" hidden ><i class="fi fi-sr-up"></i></button>
+    <div>
+        <button id="scrollToTopBtn" class="scrollToTopBtn" hidden><i class="fi fi-sr-up"></i></button>
+    </div>
+    <div>
+        <div id="chatbot" style="display: none">
+            <div class="chatbox-area">
+                <div class="title-chatbot">
+                    <button onclick="closeChatbox()"
+                            style="
+                                  padding-top: 7px;
+                                  padding-left: 3px;
+                                  background-color: transparent;
+                                  border: none;
+                                  position: fixed;
+                                ">
+                        <i class="fi fi-rr-arrow-small-left"></i>
+                    </button>
+                </div>
+                <div id="chatbox"></div>
+                <div class="chat" style="padding-top: 10px; padding-left: 7px; padding-bottom: 5px; display:flex;justify-content:space-between;">
+                    <div>
+                        <input style="border-radius: 3px;
+                                        height: 25px;
+                                        margin: 0;
+                                        background-color: white;
+                                        font-size: 15px;
+                                        margin-top: 3px;
+                                        width: 250px;"
+                               id="userInput"
+                               type="text"
+                               placeholder="   Type a message..." />
+                    </div>
+
+
+                    <div>
+                        <button style="background-color: transparent;
+                                        border: none;
+                                        color: white;
+                                        margin-right: 15px;
+                                        margin-top: 5px;"
+                                onclick="sendMessage()">
+                            <i class="fi fi-rs-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="chatbotbtn" style="display: block" onclick="openChatbox()"><i class="fi fi-brands-facebook-messenger"></i></button>
+    </div>
     <!-- footer -->
     <footer id="lienhe">
         <div class="footer-area section-bg"
@@ -233,9 +272,9 @@
         const btnScrollOnTop = document.getElementById('scrollToTopBtn')
         const docEl = document.documentElement
 
-        document.addEventListener('scroll', () => { 
+        document.addEventListener('scroll', () => {
             const scrollToTal = docEl.scrollHeight - docEl.clientHeight
-             
+
             if ((docEl.scrollTop / scrollToTal) >= 0.1) {
                 btnScrollOnTop.hidden = false
             } else {
@@ -243,12 +282,49 @@
             }
         })
 
-        btnScrollOnTop.addEventListener('click', () =>{
+        btnScrollOnTop.addEventListener('click', () => {
             docEl.scrollTo({
                 top: 0,
                 behavior: "smooth",
             })
         })
+    </script>
+    <script>
+        const content = document.getElementById("blog");
+        async function fetchBlog() {
+            const response = await fetch("https://www.googleapis.com/blogger/v3/blogs/3982189192407359422/posts?key=AIzaSyDMlxdQ-2U-feBMPC3aILnm-X1d1hcuMSA");
+            const data = await response.json();
+            content.innerHTML = data.items[0].content;
+        }
+        fetchBlog();
+    </script>
+    <script>
+        function openChatbox() {
+            var chatbot = document.getElementById("chatbot");
+            var chatbotbtn = document.getElementById("chatbotbtn");
+            if (chatbot.style.display === "none") {
+                chatbot.style.display = "block";
+                chatbotbtn.style.display = "none";
+            }
+        }
+        function closeChatbox() {
+            var chatbot = document.getElementById("chatbot");
+            var chatbotbtn = document.getElementById("chatbotbtn");
+            if (chatbot.style.display === "block") {
+                chatbot.style.display = "none";
+                chatbotbtn.style.display = "block";
+            }
+        }
+        function sendMessage() {
+            var input = document.getElementById("userInput");
+            var message = document.createElement("div");
+            message.classList.add("content");
+            var content = document.createElement("p");
+            content.textContent = input.value;
+            message.appendChild(content);
+            document.getElementById("chatbox").appendChild(message);
+            input.value = "";
+        }
     </script>
 </body>
 </html>

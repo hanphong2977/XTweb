@@ -1,5 +1,5 @@
 
-using BotDetect.Web;
+
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
@@ -18,9 +18,14 @@ builder.Services.AddScoped<IDichVuRepository, DichVuRepository>();
 builder.Services.AddScoped<ILichHenRepository, LichHenRepository>();
 builder.Services.AddScoped<INhanVienRepository, NhanVienRepository>();
 builder.Services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 //builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+builder.Services.AddScoped<IHoaDonDichVuRepository, HoaDonDichVuRepository>();
+
+
 var app = builder.Build();
 
 

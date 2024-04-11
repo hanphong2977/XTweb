@@ -1,0 +1,14 @@
+﻿@model XTweb.Models.KhachHang
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Xóa Khách Hàng</h2>
+<form asp-action="DeleteKhachHangConfirmed" method="post">
+    <input type="hidden" asp-for="MaKhachHang" />
+    <p>Bạn có muốn xóa khách hàng @Model.HoTen?</p>
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="khachhang" asp-controller="Admin" class="btn btn-primary">Back</a>
+    </div>
+
+</form>
