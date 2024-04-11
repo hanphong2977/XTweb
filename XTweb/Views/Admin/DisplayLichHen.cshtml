@@ -1,0 +1,23 @@
+﻿@model XTweb.Models.LichHen
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Display Lich Hen";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Chi Tiết Lịch Hẹn</h2>
+<hr />
+<div class="container-fluid">
+    <div>
+        <p> <b>Tên Khách Hàng:</b> @Model.MaKhachHangNavigation.HoTen</p>
+        <p> <b>SĐT:</b> @Model.MaKhachHangNavigation.Sdt</p>
+        <p> <b>Ngày Hẹn:</b> @Model.NgayHen</p>
+        <p> <b>Dịch Vụ:</b> @Model.MaDichVuNavigation.TenDichVu</p>
+        <p> <b>Barber:</b> @Model.MaNhanVienNavigation.TenNhanVien</p>
+
+
+    </div>
+    <div>
+        <a class="btn btn-primary" asp-action="lichhen">Back to List</a>
+    </div>
+
+</div>

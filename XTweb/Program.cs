@@ -15,6 +15,7 @@ builder.Services.AddScoped<IDichVuRepository, DichVuRepository>();
 builder.Services.AddScoped<ILichHenRepository, LichHenRepository>();
 builder.Services.AddScoped<INhanVienRepository, NhanVienRepository>();
 builder.Services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+builder.Services.AddScoped<IHoaDonDichVuRepository, HoaDonDichVuRepository>();
 
 var app = builder.Build();
 
