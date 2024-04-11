@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using XTweb.Models;
 
 namespace XTweb.Models;
 
@@ -190,4 +191,6 @@ public partial class XuanTamDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<XTweb.Models.RegisterModel> RegisterModel { get; set; } = default!;
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -67,9 +68,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav text-sm-center text-md-center">
-                        <li class="nav-item px-4">
-                            <a class="nav-link text-light" aria-current="page" asp-controller="User" asp-action="dangnhap"><b>Đăng Nhập</b></a>
-                        </li>
+                        <partial name="_LoginPartial" />
                     </ul>
                 </div>
             </div>

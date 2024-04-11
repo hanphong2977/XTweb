@@ -13,10 +13,14 @@
     min-height: 100vh;
 }
 
+
+label{
+    color:#fff;
+}
 .form-box {
     position: relative;
     width: 400px;
-    height: 550px;
+    height: 750px;
     border: 2px solid rgba(255, 255, 2550.5);
     border-radius: 20px;
     backdrop-filter: blur(15px);
@@ -93,4 +97,8 @@ i {
     color: #fff;
     top: 13px;
     right: 0;
+}
+.form-control::placeholder {
+  color:cadetblue;
+          
 }

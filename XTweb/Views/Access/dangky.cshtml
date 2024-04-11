@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/icon.png" />
     <title>Xuân Tâm</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -25,65 +25,64 @@
     <section class="register-area">
         <div class="container ">
             <div class="form-box" style="height:750px">
-                        <form asp-action="dangky" asp-controller="User" method="post">
-                         <h2 style="color: #fff; text-align:center; font-size:32px" >Đăng ký</h2>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    @if (ViewBag.Success!= null)
+                <form asp-action="dangky" asp-controller="User" method="post">
+                    <h2 style="color: #fff; text-align:center; font-size:32px">Đăng ký</h2>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (ViewBag.Success != null)
                     {
                         <div class="alert alert-success">@ViewBag.Success</div>
                     }
                     <div class="input-box">
-                                <label asp-for="hoten" class="bx bx-user" style="color: #fff"></label>
-                                <input asp-for="hoten" class="form-control" placeholder="Nhập Họ và tên"/>
-                                <span asp-validation-for="hoten" class="text-danger"></span>
-                            </div>
+                        <label asp-for="hoten" class="bx bx-user" style="color: #fff"></label>
+                        <input asp-for="hoten" class="form-control" placeholder="Nhập Họ và tên" />
+                        <span asp-validation-for="hoten" class="text-danger"></span>
+                    </div>
                     <div class="input-box">
                         <label asp-for="sdt" class="bx bx-phone" style="color: #fff"></label>
-                                <input asp-for="sdt" class="form-control" placeholder="Nhập số điện thoại" />
-                                <span asp-validation-for="sdt" class="text-danger"></span>
-                            </div>
+                        <input asp-for="sdt" class="form-control" placeholder="Nhập số điện thoại" />
+                        <span asp-validation-for="sdt" class="text-danger"></span>
+                    </div>
                     <div class="input-box">
                         <label asp-for="password" class="bx bx-lock-alt" style="color: #fff"></label>
-                                <input asp-for="password" class="form-control" placeholder="Nhập mật khẩu" type="password" />
-                                <span asp-validation-for="password" class="text-danger"></span>
-                            </div>
+                        <input asp-for="password" class="form-control" placeholder="Nhập mật khẩu" type="password" />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
                     <div class="input-box">
-                        <label asp-for="confirmpassword" class="bx bx-lock-alt" style="color: #fff;" ></label>
+                        <label asp-for="confirmpassword" class="bx bx-lock-alt" style="color: #fff;"></label>
                         <input asp-for="confirmpassword" class="form-control" type="password" />
-                                <span asp-validation-for="confirmpassword" class="text-danger"></span>
-                            </div>
+                        <span asp-validation-for="confirmpassword" class="text-danger"></span>
+                    </div>
                     <div id="Recaptcha"></div>
                     <div class="button">
-                                <input type="submit" value="Đăng Ký" class="btn" />
-                            </div>
-                    <div  class="group">
+                        <input type="submit" value="Đăng Ký" class="btn" />
+                    </div>
+                    <div class="group">
                         <span>
                             <a asp-action="quenmatkhau">Quên mật khẩu</a>
                         </span>
                         <span>
                             <a asp-action="dangnhap">Đăng nhập</a>
                         </span>
-                        
-                       
-                    </div>
-                    <div> 
+
 
                     </div>
-                        </form>
-                    
-            
+                    <div>
+                    </div>
+                </form>
+
+
             </div>
-            
+
         </div>
     </section>
-<
+    <
 
 
-@section Scripts {
+    @section Scripts {
 
-        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
         <script src="~/js/Register.js"></script>
-        <script >
+        <script>
             var onloadCallback = function () {
                 grecaptcha.render('Recaptcha', {
                     'sitekey': '6LeMMrcpAAAAACp1s9WzTTajVifZTe9kjD1lo7oN',
@@ -93,6 +92,6 @@
                 });
             };
         </script>
-}
+    }
 </body>
 </html>
