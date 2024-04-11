@@ -1,0 +1,43 @@
+﻿@model XTweb.Models.SanPham
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Add San Pham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Add Sản Phẩm</h2>
+<form asp-action="AddSanPham" asp-controller="Admin" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="TenSanPham"></label>
+        <input asp-for="TenSanPham" class="form-control" />
+        <span asp-validation-for="TenSanPham" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gia"></label>
+        <input asp-for="Gia" class="form-control" />
+        <span asp-validation-for="Gia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SoLuong"></label>
+        <input asp-for="SoLuong" class="form-control" />
+        <span asp-validation-for="SoLuong" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MoTaSanPham"></label>
+        <textarea asp-for="MoTaSanPham" class="form-control"></textarea>
+        <span asp-validation-for="MoTaSanPham" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="MaDanhMuc">Loại Sản Phẩm</label>
+        <select asp-for="MaDanhMuc" asp-items="ViewBag.LoaiSanPham"
+                class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="HinhAnh">Product Image</label>
+        <input type="file" asp-for="HinhAnh" class="form-control" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <a asp-action="sanpham" asp-controller="Admin" class="btn btn-primary">Back</a>
+    </div>
+</form>
