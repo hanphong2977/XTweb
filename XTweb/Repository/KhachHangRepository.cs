@@ -11,8 +11,7 @@ namespace XTweb.Repository
         {
             _context = context;
         }
-
-     
+    
 
         public async Task AddAsync(KhachHang khachhang)
         {

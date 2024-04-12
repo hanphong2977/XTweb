@@ -3,41 +3,37 @@
 }
 
 <!--thanh toán-->
-
+@model XTweb.Models.LichHen
 <section class="bill_perform">
     <div class="container">
         <div class="align-items-center mt-3 mb-4">
             <div class="text-center">
                 <h2>HÓA ĐƠN</h2>
             </div>
-            <form class="bill_form">
+            <form class="bill_form" method="post" asp-action="Checkout" asp-controller="User">
                 <div class="mt-3">
-                    <label style="margin-left:0 auto; margin-top: 3px;">Họ và tên</label>
-                    <input type="text" id="name" name="customername" required>
-                    <label style="margin-left: 0 auto">Email</label>
-                    <input type="email" id="email" name="customeremail" required>
+                    <label style="margin-left:0 auto; margin-top: 3px;">Tên khách hàng</label>
+                    <input type="text" id="name" name="customername" value="@Model.MaKhachHangNavigation.HoTen" required>
                     <label style="margin-left: 0 auto">Số điện thoại</label>
-                    <input type="tel" id="phone" name="customerphone" required>
+                    <input type="tel" id="phone" name="customerphone" value="@Model.MaKhachHangNavigation.Sdt" required>
                     <label style="margin-left: 0 auto">Ngày giờ hẹn</label>
-                    <input type="datetime-local" min="2024-3-17" max="2024-4-30" id="date" name="datetime" required>
+                    <input type="datetime-local" id="date" name="datetime" value="@Model.NgayHen.ToString("yyyy-MM-ddTHH:mm")" required>
                     <br>
                     <label style="margin-left: 0 auto">Tổng tiền</label>
-                    <input type="number" id="Tong" name="TongTien">
+                    <input type="number" id="Tong" name="TongTien" value="@Model.MaDichVuNavigation.Gia">
                     <label style="margin-left: 0 auto">Phương thức thanh toán</label>
                     <br>
-                    <button class="COD">
-                        <nav>COD</nav>
-                    </button>
-                    <button class="VNPay">
-                        <nav>VNPay</nav>
-                    </button>
-                    <button class="Momo">
-                        <nav>Momo</nav>
-                    </button>
-                    
+                    <div class="button_display">
+                        <input type="submit" name="payment" class="COD" value="COD" />
+                        <input type="submit" name="payment" class="VNPay" value="VNPay" />
+                        <input type="submit" name="payment" class="Momo" value="Momo" />
+                    </div>
+                    <input type="hidden" id="malichhen" name="malichhen" value="@Model.MaLichHen">
                 </div>
                 <a style="color: blue; margin-left:340px; margin-top:20px; margin-bottom:10px" aria-current="page" asp-controller="User" asp-action="Index">Quay Lại</a>
             </form>
         </div>
     </div>
 </section>
+
+

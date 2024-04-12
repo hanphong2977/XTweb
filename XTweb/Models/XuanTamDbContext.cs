@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using XTweb.Models;
 
 namespace XTweb.Models;
 
@@ -16,11 +15,11 @@ public partial class XuanTamDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Cthd> Cthds { get; set; }
+
     public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
 
     public virtual DbSet<DichVu> DichVus { get; set; }
-
-    public virtual DbSet<DichVuLichHen> DichVuLichHens { get; set; }
 
     public virtual DbSet<HoaDonDichVu> HoaDonDichVus { get; set; }
 
@@ -35,10 +34,49 @@ public partial class XuanTamDbContext : DbContext
     public virtual DbSet<SanPham> SanPhams { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=LAPTOP-72E84BVK\\SQLEXPRESS;Initial Catalog=XuanTamDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Cthd>(entity =>
+        {
+            entity.HasKey(e => new { e.MaLichHen, e.MaHoaDonDv });
+
+            entity.ToTable("CTHD");
+
+            entity.Property(e => e.MaHoaDonDv).HasColumnName("MaHoaDonDV");
+            entity.Property(e => e.MaGd)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("MaGD");
+            entity.Property(e => e.NgayDat).HasColumnType("datetime");
+            entity.Property(e => e.Pttt)
+                .HasMaxLength(50)
+                .HasColumnName("PTTT");
+            entity.Property(e => e.Sđt)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("SĐT");
+            entity.Property(e => e.TenKh)
+                .HasMaxLength(50)
+                .HasColumnName("TenKH");
+            entity.Property(e => e.TienThanhToan).HasColumnType("decimal(10, 0)");
+            entity.Property(e => e.TinhTrangTt)
+                .HasMaxLength(50)
+                .HasColumnName("TinhTrangTT");
+
+            entity.HasOne(d => d.MaHoaDonDvNavigation).WithMany(p => p.Cthds)
+                .HasForeignKey(d => d.MaHoaDonDv)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CTHD_HoaDonDichVu");
+
+            entity.HasOne(d => d.MaLichHenNavigation).WithMany(p => p.Cthds)
+                .HasForeignKey(d => d.MaLichHen)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CTHD_LichHen");
+        });
+
         modelBuilder.Entity<DanhMucSanPham>(entity =>
         {
             entity.HasKey(e => e.MaDanhMuc);
@@ -58,35 +96,13 @@ public partial class XuanTamDbContext : DbContext
             entity.Property(e => e.TenDichVu).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<DichVuLichHen>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("DichVu_LichHen");
-
-            entity.HasOne(d => d.IdDichVuNavigation).WithMany()
-                .HasForeignKey(d => d.IdDichVu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DichVu_LichHen_DichVu");
-
-            entity.HasOne(d => d.IdLichHenNavigation).WithMany()
-                .HasForeignKey(d => d.IdLichHen)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DichVu_LichHen_LichHen");
-        });
-
         modelBuilder.Entity<HoaDonDichVu>(entity =>
         {
             entity.HasKey(e => e.MaHoaDon);
 
             entity.ToTable("HoaDonDichVu");
 
-            entity.Property(e => e.NgayThanhToan).HasColumnType("datetime");
-
-            entity.HasOne(d => d.MaLichHenNavigation).WithMany(p => p.HoaDonDichVus)
-                .HasForeignKey(d => d.MaLichHen)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_HoaDonDichVu_LichHen");
+            entity.Property(e => e.MaHoaDon).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<HoaDonSanPham>(entity =>
@@ -191,6 +207,4 @@ public partial class XuanTamDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-public DbSet<XTweb.Models.RegisterModel> RegisterModel { get; set; } = default!;
 }

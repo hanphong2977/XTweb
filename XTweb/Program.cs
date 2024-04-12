@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using XTweb.Models;
 using XTweb.Repository;
+using XTweb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,11 @@ builder.Services.AddScoped<IKhachHangRepository, KhachHangRepository>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
-//builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-builder.Services.AddScoped<IHoaDonDichVuRepository, HoaDonDichVuRepository>();
-
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddScoped<VnPaymentRequestModel>();
+builder.Services.AddScoped<VnPaymentResponseModel>();
+builder.Services.AddScoped<IThanhToanVNPayRepository, ThanhToanVNPay>();
 
 var app = builder.Build();
 

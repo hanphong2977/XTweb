@@ -15,10 +15,9 @@ namespace XTweb.Controllers
         private readonly IDichVuRepository _dichVuRepository;
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IKhachHangRepository _khachHangRepository;
-        private readonly IHoaDonDichVuRepository _hoaDonDichVuRepository;
         public AdminController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository,
             ILichHenRepository lichHenRepository, INhanVienRepository nhanVienRepository, IDichVuRepository dichVuRepository,
-            IKhachHangRepository khachHangRepository, IHoaDonDichVuRepository hoaDonDichVuRepository)
+            IKhachHangRepository khachHangRepository)
         {
             _sanPhamRepository = sanPhamRepository;
             _loaiSanPhamRepository = loaiSanPhamRepository;
@@ -26,7 +25,6 @@ namespace XTweb.Controllers
             _nhanVienRepository = nhanVienRepository;
             _dichVuRepository = dichVuRepository;
             _khachHangRepository = khachHangRepository;
-            _hoaDonDichVuRepository = hoaDonDichVuRepository;
         }
 
         XuanTamDbContext _context = new XuanTamDbContext();

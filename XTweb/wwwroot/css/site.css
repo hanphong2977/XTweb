@@ -638,12 +638,12 @@ input {
     overflow: auto;
     bottom: 40px;
     right: 50px;
-    background-color:white;
+    background-color: white;
 }
 
 #userInput {
     width: 230px;
-    border:1px solid black;
+    border: 1px solid black;
 }
 
 .title-chatbot {
@@ -682,3 +682,85 @@ input {
         padding-top: 4px;
         max-width: 250px;
     }
+
+.bill-box {
+    margin-top: 100px;
+    margin-bottom: 200px;
+    text-align: center;
+    align-items: center;
+    height: 900px;
+    width: 1288px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+    .bill-box .bill-content {
+        display: grid;
+        grid-template-columns: 60% 40%;
+    }
+
+.view_content {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: 2px solid #834E28;
+    border-radius: 20px;
+}
+
+    .view_content img {
+        margin-top: 10px;
+        margin: 0 auto;
+    }
+
+    .view_content h2 {
+        margin-top: 10px;
+        color: #0aa06e;
+        font-weight: bold;
+    }
+
+.gif-image {
+    align-items: center;
+}
+
+    .gif-image img {
+        max-width: 100%;
+        height: 745px;
+        object-fit: contain;
+    }
+
+.body-image {
+    background-image: url(../image/barbershop-tools.jpg);
+}
+
+.view_content .detail_payment {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.detail_payment .text-bold {
+    text-align: left;
+}
+.text-bold h3 {
+    margin-top: 20px;
+    color: #222222;
+    font-weight: 500;
+    padding: 15px;
+}
+
+.text-nonebold {
+    text-align: right;
+}
+
+    .text-nonebold h3 {
+        margin-top: 40px;
+        color: gray;
+        font-weight: 500;
+    }
+
+.btndisplay {
+    margin: 20px;
+}
+
+.bill-content {
+    margin-bottom: 50px;
+}

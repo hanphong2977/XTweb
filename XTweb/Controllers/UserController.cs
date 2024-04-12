@@ -6,6 +6,7 @@ using System.Diagnostics.Eventing.Reader;
 using X.PagedList;
 using XTweb.Models;
 using XTweb.Repository;
+using XTweb.Services;
 
 namespace XTBarber.Controllers
 {
@@ -16,14 +17,24 @@ namespace XTBarber.Controllers
         private readonly ILichHenRepository _lichHenRepository;
         private readonly IDichVuRepository _dichVuRepository;
         private readonly INhanVienRepository _nhanVienRepository;
+        private readonly VnPaymentRequestModel _vnPaymentRequestModel;
+        private readonly VnPaymentResponseModel _vnPaymentResponse1Model;
+        private readonly IVnPayService _vnPayService;
+        private readonly IThanhToanVNPayRepository _nhanToanVNPayRepository;
         public UserController(ISanPhamRepository sanPhamRepository, ILoaiSanPhamRepository loaiSanPhamRepository, 
-            ILichHenRepository lichHenRepository, INhanVienRepository nhanVienRepository, IDichVuRepository dichVuRepository)
+            ILichHenRepository lichHenRepository, INhanVienRepository nhanVienRepository, IDichVuRepository dichVuRepository,
+            IVnPayService vnPayService, VnPaymentResponseModel vnPaymentResponseModel, VnPaymentRequestModel vnPaymentRequestModel,
+            IThanhToanVNPayRepository nhanToanVNPayRepository)
         {
             _sanPhamRepository = sanPhamRepository;
             _loaiSanPhamRepository = loaiSanPhamRepository;
             _lichHenRepository = lichHenRepository;
             _nhanVienRepository = nhanVienRepository;
             _dichVuRepository = dichVuRepository;
+            _vnPayService = vnPayService;
+            _vnPaymentRequestModel = vnPaymentRequestModel;
+            _vnPaymentResponse1Model = vnPaymentResponseModel;
+            _nhanToanVNPayRepository = nhanToanVNPayRepository;
         }
         XuanTamDbContext _context = new XuanTamDbContext();
 
@@ -65,7 +76,7 @@ namespace XTBarber.Controllers
         }
 
         [HttpPost]
-        public IActionResult dangky( RegisterModel model)
+        public async Task <IActionResult> dangky(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -77,12 +88,16 @@ namespace XTBarber.Controllers
                 }
                 else
                 {
-                    var us = new KhachHang();
-                    us.Sdt = model.sdt;
-                    us.HoTen = model.hoten;
-                    us.MatKhau = model.password;
-                    
-                    var result = tmp.AddAsync(us);
+                    KhachHang us = new KhachHang()
+                    {
+                        Sdt = model.sdt,
+                        HoTen = model.hoten,
+                        MatKhau = model.password,
+                    };
+
+
+                    var result = _context.KhachHangs.AddAsync(us);
+                    await _context.SaveChangesAsync();
                     if (result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công!";
@@ -141,7 +156,7 @@ namespace XTBarber.Controllers
                     NgayHen = model.NgayHen,
                 };
                 await _lichHenRepository.AddAsync(lichhen);
-                return RedirectToAction("ThanhToan");
+                return RedirectToAction("thanhtoan", new { id = lichhen.MaLichHen });
             }
             // Nếu ModelState không hợp lệ, hiển thị form với dữ liệu đã nhập
             return View(model);
@@ -182,13 +197,150 @@ namespace XTBarber.Controllers
             return View();
         }
 
-        public IActionResult thanhtoan()
+        public async Task<IActionResult> thanhtoanAsync(int id)
+        {
+            LichHen lichHen = await _lichHenRepository.GetByIdAsync(id);
+            return View(lichHen);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(string submitButton, string customername, string customerphone, DateTime datetime, decimal tongtien, int malichhen, string payment = "COD")
+        {
+
+            if (payment == "VNPay")
+            {
+                var vnpaymodel = new VnPaymentRequestModel
+                {
+                    Amount = Convert.ToDouble(tongtien),
+                    customername = customername,
+                    customerphone = customerphone,
+                    DateCreate = datetime,
+                    MalichHen = malichhen,
+                };
+                return Redirect(_vnPayService.CreatePaymentURL(HttpContext, vnpaymodel));
+            }
+            if (payment == "Momo")
+            {
+
+
+            }
+            else
+            {
+                TempData["customername"] = customername;
+                TempData["customerphone"] = customerphone;
+                TempData["datetime"] = datetime.ToString("yyyy-MM-dd HH:mm:ss");
+                TempData["tongtien"] = tongtien.ToString();
+                TempData["malichhen"] = malichhen.ToString();
+                return RedirectToAction("COD");
+            }
+            return View(Index);
+        }
+
+        private string GenerateRandomCode()
+        {
+            Random random = new Random();
+            const string chars = "0123456789";
+            return new string(Enumerable.Repeat(chars, 8)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public IActionResult CreatePaymentUrl(VnPaymentRequestModel model)
+        {
+            var url = _vnPayService.CreatePaymentURL(HttpContext, model);
+
+            return Redirect(url);
+        }
+
+        public IActionResult PaymentFail()
         {
             return View();
         }
 
-  
-       
+        public IActionResult PaymentCallBack()
+        {
+
+            var response = _vnPayService.PaymentExecute(Request.Query);
+            if (response == null || response.VnPayResponseCode != "00")
+            {
+
+                TempData["Message"] = $"Lỗi thanh toán VNPay: {response.VnPayResponseCode}";
+                return RedirectToAction("PaymentFail");
+            }
+            VnPaymentResponseModel model = new VnPaymentResponseModel();
+            model = response;
+            TempData["Message"] = $"thanh toán VNPay thành công";
+            return RedirectToAction("PaySuccess", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PaySuccess(VnPaymentResponseModel model)
+        {
+            HoaDonDichVu hoadondv = new HoaDonDichVu()
+            {
+                MaHoaDon = model.OrderId,
+                TongTien = model.Amount,
+            };
+            await _context.HoaDonDichVus.AddAsync(hoadondv);
+            _context.SaveChanges();
+
+            Cthd cthddv = new Cthd()
+            {
+                MaGd = model.TransactionId,
+                TenKh = model.OrderInfo,
+                NgayDat = DateTime.UtcNow,
+                TienThanhToan = Convert.ToDecimal(model.Amount),
+                Pttt = model.PaymentMethod,
+                TinhTrangTt = model.VnPayResponseCode,
+                Sđt = model.Tel,
+                MaHoaDonDv = model.OrderId,
+                MaLichHen = model.malichhen,
+            };
+            await _nhanToanVNPayRepository.AddAsync(cthddv);
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> COD()
+        {
+
+            string customername = TempData["customername"] as string;
+            string customerphone = TempData["customerphone"] as string;
+            DateTime DateCreate = DateTime.Parse(TempData["datetime"] as string);
+            decimal tongtien = decimal.Parse(TempData["tongtien"] as string);
+            int malichhen = int.Parse(TempData["malichhen"] as string);
+            var payment = "COD";
+            var tick = DateTime.Now.Ticks.ToString();
+            var MHD = Convert.ToInt64(tick);
+            var vnpaymodel = new VnPaymentRequestModel
+            {
+                Amount = Convert.ToDouble(tongtien),
+                customername = customername,
+                customerphone = customerphone,
+                DateCreate = DateCreate,
+                MalichHen = malichhen,
+            };
+            HoaDonDichVu hoadondv = new HoaDonDichVu()
+            {
+                MaHoaDon = MHD,
+                TongTien = Convert.ToDouble(tongtien),
+            };
+            await _context.HoaDonDichVus.AddAsync(hoadondv);
+            _context.SaveChanges();
+            Cthd cthddv = new Cthd()
+            {
+                MaGd = GenerateRandomCode(),
+                TenKh = customername,
+                NgayDat = DateCreate,
+                TienThanhToan = Convert.ToDecimal(tongtien),
+                Pttt = payment,
+                TinhTrangTt = "01",
+                Sđt = customerphone,
+                MaHoaDonDv = MHD,
+                MaLichHen = malichhen,
+            };
+            await _nhanToanVNPayRepository.AddAsync(cthddv);
+            return View("PaySuccessCOD", vnpaymodel);
+        }
+
         public IActionResult quenmatkhau() {
             return View();
         }
@@ -204,5 +356,3 @@ namespace XTBarber.Controllers
         }
     }
 }
-//6LeMMrcpAAAAACp1s9WzTTajVifZTe9kjD1lo7oN
-//6LeMMrcpAAAAAM0blFoH8omK97kBjrPzn-oL_7RC
