@@ -98,11 +98,11 @@ namespace XTBarber.Controllers
 
                     var result = _context.KhachHangs.AddAsync(us);
                     await _context.SaveChangesAsync();
-                    if (result != null)
+                    if (await result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công!";
                         model = new RegisterModel();
-                     
+                        return RedirectToAction("dangnhap");
                     }
                     else
                     {
