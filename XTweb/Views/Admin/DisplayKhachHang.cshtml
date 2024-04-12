@@ -7,8 +7,10 @@
 <hr />
 <div class="container-view">
     <div class="left-site">
+        <p> <b>Mã khách hàng:</b> @Model.MaKhachHang</p>
         <p> <b>Họ Tên:</b> @Model.HoTen</p>
-        <p> <b>Địa Chỉ:</b> @Model.Sdt</p>
+        <p> <b>SĐT:</b> @Model.Sdt</p>
+        <p> <b>Mật khẩu:</b> @Model.MatKhau</p>
         <div>
             <a asp-action="UpdateKhachHang" asp-controller="Admin" asp-route-id="@Model.MaKhachHang" class="btn btn-primary">Edit</a>
             <a asp-action="khachhang" asp-controller="Admin" class="btn btn-primary">Back</a>

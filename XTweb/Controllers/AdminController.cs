@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using XTweb.Models;
+using XTweb.Models.Authentication;
 using XTweb.Repository;
 
 
@@ -31,6 +32,7 @@ namespace XTweb.Controllers
 
         XuanTamDbContext _context = new XuanTamDbContext();
         //Nhân Viên
+        [Authentication_Admin]
         public async Task<IActionResult> Index()
         {
             var model = await _nhanVienRepository.GetAllAsync();
@@ -315,6 +317,38 @@ namespace XTweb.Controllers
             return View(lichhen);
         }
 
+        public IActionResult dangxuat()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("sdt");
+            return RedirectToAction("dangnhap", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult dangnhap()
+        {
+            if (HttpContext.Session.GetString("sdt") == null)
+                return View();
+            else
+                return RedirectToAction("Index", "Admin");
+        }
+        [HttpPost]
+        public IActionResult dangnhap(Admin_LoginModel model)
+        {
+            if (HttpContext.Session.GetString("sdt") == null)
+            {
+                var u = _context.NhanViens.Where(t => t.Sdt.Equals(model.sdt) && t.MatKhau == model.password).FirstOrDefault();
+                if (u != null)
+                {
+                    HttpContext.Session.SetString("sdt", u.Sdt.ToString());
+                    HttpContext.Session.SetInt32("IdNV", u.MaNhanVien);
+                    return RedirectToAction("Index","Admin");
+                }
+                else { return RedirectToAction("Index"); }
+            }
+            return View(model);    
+        }
+
         public void ThucHienXoaLichHenHangNgay()
         {
             RecurringJob.AddOrUpdate("xoalichhenhangngay", () => DeleteLichHen(), Cron.Daily);
@@ -342,6 +376,7 @@ namespace XTweb.Controllers
         }
 
         [HttpPost]
+        [Authentication_Admin(IdChucNang =1)]
         public async Task<IActionResult> AddSanPham(SanPham sanpham, IFormFile HinhAnh)
         {
             if (ModelState.IsValid)

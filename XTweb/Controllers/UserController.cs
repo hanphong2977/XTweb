@@ -65,7 +65,7 @@ namespace XTBarber.Controllers
         }
 
         [HttpPost]
-        public IActionResult dangky( RegisterModel model)
+        public async Task<IActionResult> dangky( RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -83,11 +83,11 @@ namespace XTBarber.Controllers
                     us.MatKhau = model.password;
                     
                     var result = tmp.AddAsync(us);
+                    await _context.SaveChangesAsync();
                     if (result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công!";
-                        model = new RegisterModel();
-                     
+                        model = new RegisterModel();                     
                     }
                     else
                     {

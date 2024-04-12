@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using XTweb.Models;
 
 namespace XTweb.Models;
 
@@ -16,11 +15,11 @@ public partial class XuanTamDbContext : DbContext
     {
     }
 
+    public virtual DbSet<ChucNang> ChucNangs { get; set; }
+
     public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
 
     public virtual DbSet<DichVu> DichVus { get; set; }
-
-    public virtual DbSet<DichVuLichHen> DichVuLichHens { get; set; }
 
     public virtual DbSet<HoaDonDichVu> HoaDonDichVus { get; set; }
 
@@ -32,13 +31,27 @@ public partial class XuanTamDbContext : DbContext
 
     public virtual DbSet<NhanVien> NhanViens { get; set; }
 
+    public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
+
     public virtual DbSet<SanPham> SanPhams { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-72E84BVK\\SQLEXPRESS;Initial Catalog=XuanTamDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=HIROT\\HIROT;Initial Catalog=XuanTamDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ChucNang>(entity =>
+        {
+            entity.ToTable("ChucNang");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("ID");
+            entity.Property(e => e.MaChucNang).HasMaxLength(50);
+            entity.Property(e => e.TenChucNang).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<DanhMucSanPham>(entity =>
         {
             entity.HasKey(e => e.MaDanhMuc);
@@ -56,23 +69,6 @@ public partial class XuanTamDbContext : DbContext
 
             entity.Property(e => e.AnhDichVu).IsUnicode(false);
             entity.Property(e => e.TenDichVu).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<DichVuLichHen>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("DichVu_LichHen");
-
-            entity.HasOne(d => d.IdDichVuNavigation).WithMany()
-                .HasForeignKey(d => d.IdDichVu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DichVu_LichHen_DichVu");
-
-            entity.HasOne(d => d.IdLichHenNavigation).WithMany()
-                .HasForeignKey(d => d.IdLichHen)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DichVu_LichHen_LichHen");
         });
 
         modelBuilder.Entity<HoaDonDichVu>(entity =>
@@ -172,6 +168,23 @@ public partial class XuanTamDbContext : DbContext
             entity.Property(e => e.TenNhanVien).HasMaxLength(250);
         });
 
+        modelBuilder.Entity<PhanQuyen>(entity =>
+        {
+            entity.HasKey(e => new { e.IdChucNang, e.IdNhanVien });
+
+            entity.ToTable("PhanQuyen");
+
+            entity.Property(e => e.GhiNang).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdChucNangNavigation).WithMany(p => p.PhanQuyens)
+                .HasForeignKey(d => d.IdChucNang)
+                .HasConstraintName("FK_PhanQuyen_ChucNang");
+
+            entity.HasOne(d => d.IdNhanVienNavigation).WithMany(p => p.PhanQuyens)
+                .HasForeignKey(d => d.IdNhanVien)
+                .HasConstraintName("FK_PhanQuyen_NhanVien");
+        });
+
         modelBuilder.Entity<SanPham>(entity =>
         {
             entity.HasKey(e => e.MaSanPham);
@@ -191,6 +204,4 @@ public partial class XuanTamDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-public DbSet<XTweb.Models.RegisterModel> RegisterModel { get; set; } = default!;
 }

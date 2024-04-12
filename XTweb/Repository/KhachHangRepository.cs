@@ -44,9 +44,9 @@ namespace XTweb.Repository
             return _context.KhachHangs.Count(t=> t.Sdt ==  sdt)>0;
         }
 
-        public Task<KhachHang> GetByIdAsync(int id)
+        public async Task<KhachHang> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.KhachHangs.FindAsync(id);
         }
 
         public async Task<KhachHang> GetBySdtAsync(string sdt)

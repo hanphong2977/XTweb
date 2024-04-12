@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,10 +66,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a asp-action="dangxuat" asp-controller="Admin">
                                 <i style="margin-left:4px;" class='bx bx-log-out icon'></i>
-                                <span class="text"> Đăng xuất   </span>
+                                <span class="text" > Đăng xuất</span>
                             </a>
+                        </li>
+                        <li>
+                            <partial name="_LoginPartial_Admin"/>
                         </li>
                     </ul>
                 </div>

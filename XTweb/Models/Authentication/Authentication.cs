@@ -16,7 +16,6 @@ namespace XTweb.Models.Authentication
                         {"Action","dangnhap" }
                     });
             }
-
         }
 
     }
