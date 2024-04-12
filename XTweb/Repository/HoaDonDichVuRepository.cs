@@ -26,12 +26,12 @@ namespace XTweb.Repository
 
         public async Task<IEnumerable<HoaDonDichVu>> GetAllAsync()
         {
-            return await _context.HoaDonDichVus.Include(p => p.MaLichHenNavigation).ToListAsync();
+            return await _context.HoaDonDichVus.Include(p => p.MaHoaDon).ToListAsync();
         }
 
         public async Task<HoaDonDichVu> GetByIdAsync(int id)
         {
-            return await _context.HoaDonDichVus.Include(p => p.MaLichHenNavigation).FirstOrDefaultAsync(x => x.MaHoaDon == id);
+            return await _context.HoaDonDichVus.Include(p => p.MaHoaDon).FirstOrDefaultAsync(x => x.MaHoaDon == id);
         }
 
         public async Task UpdateAsync(HoaDonDichVu hoadondichvu)

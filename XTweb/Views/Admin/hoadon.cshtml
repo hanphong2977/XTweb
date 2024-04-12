@@ -20,12 +20,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.MaLichHenNavigation.MaKhachHangNavigation .HoTen</td>
-                <td>@item.MaLichHenNavigation.MaDichVuNavigation.TenDichVu</td>
-                <td>@item.NgayThanhToan</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>@item.TongTien</td>
                 <td style="text-align: center">
-                    <a class="btn-table" asp-action="DisplayHoaDon" asp-controller="Admin" asp-route-id="@item.MaLichHen">Xem</a>
+                    <a class="btn-table" asp-action="DisplayHoaDon" asp-controller="Admin" asp-route-id="@item.MaHoaDon">Xem</a>
                 </td>
             </tr>
         }

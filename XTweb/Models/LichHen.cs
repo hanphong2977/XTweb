@@ -15,7 +15,7 @@ public partial class LichHen
 
     public int MaNhanVien { get; set; }
 
-    public virtual ICollection<HoaDonDichVu> HoaDonDichVus { get; set; } = new List<HoaDonDichVu>();
+    public virtual ICollection<Cthd> Cthds { get; set; } = new List<Cthd>();
 
     public virtual DichVu MaDichVuNavigation { get; set; } = null!;
 

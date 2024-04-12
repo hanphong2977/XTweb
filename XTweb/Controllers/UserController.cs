@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Eventing.Reader;
+using System.Diagnostics.Metrics;
 using X.PagedList;
 using XTweb.Models;
 using XTweb.Repository;
@@ -65,7 +66,7 @@ namespace XTBarber.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> dangky( RegisterModel model)
+        public async Task <IActionResult> dangky( RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -77,23 +78,27 @@ namespace XTBarber.Controllers
                 }
                 else
                 {
-                    var us = new KhachHang();
-                    us.Sdt = model.sdt;
-                    us.HoTen = model.hoten;
-                    us.MatKhau = model.password;
-                    
-                    var result = tmp.AddAsync(us);
+                    KhachHang us = new KhachHang()
+                    {
+                        Sdt = model.sdt,
+                        HoTen = model.hoten,
+                        MatKhau = model.password,
+                    };
+
+
+                    var result = _context.KhachHangs.AddAsync(us);
                     await _context.SaveChangesAsync();
-                    if (result != null)
+                    if (await result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công!";
-                        model = new RegisterModel();                     
+                        model = new RegisterModel();
+                        return RedirectToAction("dangnhap");
                     }
                     else
                     {
                         ModelState.AddModelError("", "Đăng Ký không thành công!!");
                     }
-                    
+
                 }
             }
             return View(model);

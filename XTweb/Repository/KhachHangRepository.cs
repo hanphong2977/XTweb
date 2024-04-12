@@ -46,7 +46,7 @@ namespace XTweb.Repository
 
         public async Task<KhachHang> GetByIdAsync(int id)
         {
-            return await _context.KhachHangs.FindAsync(id);
+            return await _context.KhachHangs.FirstOrDefaultAsync(x => x.MaKhachHang == id);
         }
 
         public async Task<KhachHang> GetBySdtAsync(string sdt)

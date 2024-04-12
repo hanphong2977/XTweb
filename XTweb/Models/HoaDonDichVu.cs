@@ -5,13 +5,9 @@ namespace XTweb.Models;
 
 public partial class HoaDonDichVu
 {
-    public int MaHoaDon { get; set; }
-
-    public int MaLichHen { get; set; }
-
-    public DateTime NgayThanhToan { get; set; }
+    public long MaHoaDon { get; set; }
 
     public double TongTien { get; set; }
 
-    public virtual LichHen MaLichHenNavigation { get; set; } = null!;
+    public virtual ICollection<Cthd> Cthds { get; set; } = new List<Cthd>();
 }
