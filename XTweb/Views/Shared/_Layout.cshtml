@@ -68,6 +68,11 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav text-sm-center text-md-center">
+                        <form class="d-flex">
+                            <button asp-controller="GioHang" asp-action="Index" class="btn btn-outline-dark text-light" type="submit">
+                                <i class="fi fi-rr-shopping-cart text-light"></i>
+                            </button>
+                        </form>
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>
@@ -75,7 +80,7 @@
         </nav>
     </header>
 
-    <div>
+    <div >
         @RenderBody()
 
     </div>
@@ -324,6 +329,19 @@
             message.appendChild(content);
             document.getElementById("chatbox").appendChild(message);
             input.value = "";
+        }
+    </script>
+    <script>
+        function increment() {
+            var quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        }
+
+        function decrement() {
+            var quantityInput = document.getElementById('quantity');
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
         }
     </script>
 </body>

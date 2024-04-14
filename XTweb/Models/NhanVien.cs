@@ -20,4 +20,6 @@ public partial class NhanVien
     public string? AnhNhanVien { get; set; }
 
     public virtual ICollection<LichHen> LichHens { get; set; } = new List<LichHen>();
+
+    public virtual ICollection<PhanQuyen> PhanQuyens { get; set; } = new List<PhanQuyen>();
 }

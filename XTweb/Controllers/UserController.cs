@@ -63,6 +63,7 @@ namespace XTBarber.Controllers
                 if (u != null)
                 {
                     HttpContext.Session.SetString("sdt", u.Sdt.ToString());
+                    HttpContext.Session.SetInt32("MaKhachHang", u.MaKhachHang);
                     return RedirectToAction("Index", "User");
                 }
             }
@@ -291,7 +292,7 @@ namespace XTBarber.Controllers
                 TienThanhToan = Convert.ToDecimal(model.Amount),
                 Pttt = model.PaymentMethod,
                 TinhTrangTt = model.VnPayResponseCode,
-                Sđt = model.Tel,
+                Sdt = model.Tel,
                 MaHoaDonDv = model.OrderId,
                 MaLichHen = model.malichhen,
             };
@@ -333,7 +334,7 @@ namespace XTBarber.Controllers
                 TienThanhToan = Convert.ToDecimal(tongtien),
                 Pttt = payment,
                 TinhTrangTt = "01",
-                Sđt = customerphone,
+                Sdt = customerphone,
                 MaHoaDonDv = MHD,
                 MaLichHen = malichhen,
             };

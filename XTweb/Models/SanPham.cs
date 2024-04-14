@@ -19,7 +19,7 @@ public partial class SanPham
 
     public string? HinhAnh { get; set; }
 
-    public virtual ICollection<HoaDonSanPham> HoaDonSanPhams { get; set; } = new List<HoaDonSanPham>();
+    public virtual ICollection<CthdsanPham> CthdsanPhams { get; set; } = new List<CthdsanPham>();
 
-    public virtual DanhMucSanPham MaDanhMucNavigation { get; set; } = null!;
+    public virtual DanhMucSanPham? MaDanhMucNavigation { get; set; } = null!;
 }
