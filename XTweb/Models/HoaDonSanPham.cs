@@ -15,7 +15,7 @@ public partial class HoaDonSanPham
 
     public string DiaChiGiaoHang { get; set; } = null!;
 
-    public string LuuY { get; set; } = null!;
+    public string? LuuY { get; set; }
 
     public virtual ICollection<CthdsanPham> CthdsanPhams { get; set; } = new List<CthdsanPham>();
 

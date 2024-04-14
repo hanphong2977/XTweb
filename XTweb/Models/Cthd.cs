@@ -15,7 +15,7 @@ public partial class Cthd
 
     public string MaGd { get; set; } = null!;
 
-    public string? Sdt { get; set; }
+    public string Sdt { get; set; } = null!;
 
     public string TinhTrangTt { get; set; } = null!;
 
