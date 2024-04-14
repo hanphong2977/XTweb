@@ -346,10 +346,7 @@ namespace XTweb.Controllers
             return View(lichhen);
         }
 
-        public void ThucHienXoaLichHenHangNgay()
-        {
-            RecurringJob.AddOrUpdate("xoalichhenhangngay", () => DeleteLichHen(), Cron.Daily);
-        }
+   
 
         [HttpPost]
         public async Task<IActionResult> DeleteLichHen()

@@ -36,7 +36,7 @@ builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<VnPaymentRequestModel>();
 builder.Services.AddScoped<VnPaymentResponseModel>();
 builder.Services.AddScoped<IThanhToanVNPayRepository, ThanhToanVNPay>();
-
+builder.Services.AddSingleton<ThucHienXoaLichHenHangNgay>();
 var app = builder.Build();
 
 

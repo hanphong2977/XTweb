@@ -162,9 +162,7 @@ public partial class XuanTamDbContext : DbContext
 
             entity.ToTable("KhachHang");
 
-            entity.Property(e => e.Email)
-                .HasMaxLength(80)
-                .IsUnicode(false);
+       
             entity.Property(e => e.HoTen).HasMaxLength(250);
             entity.Property(e => e.MatKhau)
                 .HasMaxLength(10)
