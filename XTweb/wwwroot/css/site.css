@@ -764,3 +764,66 @@ input {
 .bill-content {
     margin-bottom: 50px;
 }
+
+.cart-chitietsanpham {
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-chitietsanpham {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+    .product-chitietsanpham img {
+        width: 100px;
+        height: auto;
+        margin-right: 20px;
+    }
+
+.details-chitietsanpham {
+    flex: 1;
+}
+
+.quantity-chitietsanpham {
+    display: flex;
+    align-items: center;
+}
+
+.btn-minus,
+.btn-plus {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ad9551;
+    height: 29px;
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 40px;
+}
+
+.remove {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.total {
+    margin-top: 20px;
+    text-align: right;
+}
+
+    .total p {
+        font-weight: bold;
+    }
+
+.checkout {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

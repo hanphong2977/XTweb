@@ -15,7 +15,11 @@ public partial class XuanTamDbContext : DbContext
     {
     }
 
+    public virtual DbSet<ChucNang> ChucNangs { get; set; }
+
     public virtual DbSet<Cthd> Cthds { get; set; }
+
+    public virtual DbSet<CthdsanPham> CthdsanPhams { get; set; }
 
     public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
 
@@ -31,16 +35,29 @@ public partial class XuanTamDbContext : DbContext
 
     public virtual DbSet<NhanVien> NhanViens { get; set; }
 
+    public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
+
     public virtual DbSet<SanPham> SanPhams { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-72E84BVK\\SQLEXPRESS;Initial Catalog=XuanTamDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-POG8JUL\\SQLEXPRESS;Initial Catalog=XuanTamDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ChucNang>(entity =>
+        {
+            entity.ToTable("ChucNang");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("ID");
+            entity.Property(e => e.MaChucNang).HasMaxLength(50);
+            entity.Property(e => e.TenChucNang).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Cthd>(entity =>
         {
-            entity.HasKey(e => new { e.MaLichHen, e.MaHoaDonDv });
+            entity.HasKey(e => new { e.MaLichHen, e.MaHoaDonDv }).HasName("PK_CTHD_1");
 
             entity.ToTable("CTHD");
 
@@ -53,10 +70,10 @@ public partial class XuanTamDbContext : DbContext
             entity.Property(e => e.Pttt)
                 .HasMaxLength(50)
                 .HasColumnName("PTTT");
-            entity.Property(e => e.Sđt)
+            entity.Property(e => e.Sdt)
                 .HasMaxLength(10)
                 .IsFixedLength()
-                .HasColumnName("SĐT");
+                .HasColumnName("SDT");
             entity.Property(e => e.TenKh)
                 .HasMaxLength(50)
                 .HasColumnName("TenKH");
@@ -74,6 +91,26 @@ public partial class XuanTamDbContext : DbContext
                 .HasForeignKey(d => d.MaLichHen)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CTHD_LichHen");
+        });
+
+        modelBuilder.Entity<CthdsanPham>(entity =>
+        {
+            entity.HasKey(e => e.MaCthdsanPham);
+
+            entity.ToTable("CTHDSanPham");
+
+            entity.Property(e => e.MaCthdsanPham).HasColumnName("MaCTHDSanPham");
+            entity.Property(e => e.Gia).HasColumnType("decimal(18, 0)");
+
+            entity.HasOne(d => d.MaHoaDonSanPhamNavigation).WithMany(p => p.CthdsanPhams)
+                .HasForeignKey(d => d.MaHoaDonSanPham)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CTHDSanPham_HoaDonSanPham");
+
+            entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.CthdsanPhams)
+                .HasForeignKey(d => d.MaSanPham)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CTHDSanPham_SanPham");
         });
 
         modelBuilder.Entity<DanhMucSanPham>(entity =>
@@ -116,11 +153,6 @@ public partial class XuanTamDbContext : DbContext
                 .HasForeignKey(d => d.MaKhachHang)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HoaDonSanPham_KhachHang");
-
-            entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.HoaDonSanPhams)
-                .HasForeignKey(d => d.MaSanPham)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_HoaDonSanPham_SanPham");
         });
 
         modelBuilder.Entity<KhachHang>(entity =>
@@ -129,6 +161,9 @@ public partial class XuanTamDbContext : DbContext
 
             entity.ToTable("KhachHang");
 
+            entity.Property(e => e.Email)
+                .HasMaxLength(80)
+                .IsUnicode(false);
             entity.Property(e => e.HoTen).HasMaxLength(250);
             entity.Property(e => e.MatKhau)
                 .HasMaxLength(10)
@@ -185,6 +220,23 @@ public partial class XuanTamDbContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("SDT");
             entity.Property(e => e.TenNhanVien).HasMaxLength(250);
+        });
+
+        modelBuilder.Entity<PhanQuyen>(entity =>
+        {
+            entity.HasKey(e => new { e.IdChucNang, e.IdNhanVien });
+
+            entity.ToTable("PhanQuyen");
+
+            entity.Property(e => e.GhiNang).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdChucNangNavigation).WithMany(p => p.PhanQuyens)
+                .HasForeignKey(d => d.IdChucNang)
+                .HasConstraintName("FK_PhanQuyen_ChucNang");
+
+            entity.HasOne(d => d.IdNhanVienNavigation).WithMany(p => p.PhanQuyens)
+                .HasForeignKey(d => d.IdNhanVien)
+                .HasConstraintName("FK_PhanQuyen_NhanVien");
         });
 
         modelBuilder.Entity<SanPham>(entity =>

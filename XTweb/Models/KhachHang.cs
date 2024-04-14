@@ -11,6 +11,8 @@ public partial class KhachHang
 
     public string Sdt { get; set; } = null!;
 
+    public string Email { get; set; } = null!;
+
     public string MatKhau { get; set; } = null!;
 
     public virtual ICollection<HoaDonSanPham> HoaDonSanPhams { get; set; } = new List<HoaDonSanPham>();
