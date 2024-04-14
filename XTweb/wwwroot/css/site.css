@@ -526,6 +526,12 @@ input {
     background-color: transparent;
 }
 
+.button_display {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
 .VNPay {
     margin-left: 100px;
     padding: 10px;
@@ -536,7 +542,10 @@ input {
     padding-left: 20px;
     padding-right: 20px;
     background-image: linear-gradient(#085fac,#ee1c25 );
+    width: 150px;
+    margin: 0;
 }
+
 
     .VNPay :hover {
         color: black;
@@ -551,6 +560,8 @@ input {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
+    width: 150px;
+    margin: 0;
 }
 
     .Momo:hover {
@@ -570,6 +581,8 @@ input {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
+    width: 150px;
+    margin: 0;
 }
 
     .COD:hover {
@@ -608,6 +621,7 @@ input {
     color: white;
     border-radius: 50%;
     border: 0px;
+    right: 40px;
 }
 
 #chatbotbtn {
@@ -688,7 +702,7 @@ input {
     margin-bottom: 200px;
     text-align: center;
     align-items: center;
-    height: 900px;
+   max-height: 900px;
     width: 1288px;
     background-color: #fff;
     border-radius: 20px;

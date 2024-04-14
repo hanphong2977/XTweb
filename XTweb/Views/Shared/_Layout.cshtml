@@ -31,9 +31,10 @@
             width: 100%;
         }
     </style>
+    <script src="~/js/script.js" defer></script>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/chitietdichvu.css" />
-
+    <link rel="stylesheet" href="~/css/chat.css" />
 </head>
 <body>
     <!-- header -->
@@ -88,52 +89,32 @@
         <button id="scrollToTopBtn" class="scrollToTopBtn" hidden><i class="fi fi-sr-up"></i></button>
     </div>
     <div>
-        <div id="chatbot" style="display: none">
-            <div class="chatbox-area">
-                <div class="title-chatbot">
-                    <button onclick="closeChatbox()"
-                            style="
-                                  padding-top: 7px;
-                                  padding-left: 3px;
-                                  background-color: transparent;
-                                  border: none;
-                                  position: fixed;
-                                ">
-                        <i class="fi fi-rr-arrow-small-left"></i>
+        <button class="chatbot-toggler">
+            <i class="fi fi-rs-comment"></i>
+            <i class="fi fi-sr-cross-small"></i>
                     </button>
-                </div>
-                <div id="chatbox"></div>
-                <div class="chat" style="padding-top: 10px; padding-left: 7px; padding-bottom: 5px; display:flex;justify-content:space-between;">
-                    <div>
-                        <input style="border-radius: 3px;
-                                        height: 25px;
-                                        margin: 0;
-                                        background-color: white;
-                                        font-size: 15px;
-                                        margin-top: 3px;
-                                        width: 250px;"
-                               id="userInput"
-                               type="text"
-                               placeholder="   Type a message..." />
+        <div class="chatbot">
+            <header>
+                <h2>Chatbot</h2>
+                <i class="close-btn fi fi-sr-cross-small"></i>
+            </header>
+            <ul class="chatbox">
+                <li class="chat incoming">
+                    <i class="fi fi-rr-robot"></i>
+                    <p>Xin Chào Bạn! bạn có điều gì cần tư vấn sao.</p>
+                </li>
+            </ul>
+            <div class="chat-input">
+                <textarea placeholder="Enter a massage..." required></textarea>
+                <i class="fi fi-rr-paper-plane-top"></i>
                     </div>
 
 
-                    <div>
-                        <button style="background-color: transparent;
-                                        border: none;
-                                        color: white;
-                                        margin-right: 15px;
-                                        margin-top: 5px;"
-                                onclick="sendMessage()">
-                            <i class="fi fi-rs-paper-plane"></i>
-                        </button>
+                  
                     </div>
                 </div>
-            </div>
-        </div>
-        <button id="chatbotbtn" style="display: block" onclick="openChatbox()"><i class="fi fi-brands-facebook-messenger"></i></button>
-    </div>
-    <!-- footer -->
+       
+     <!-- footer -->
     <footer id="lienhe">
         <div class="footer-area section-bg"
              style="background-color: #212529">
@@ -303,34 +284,7 @@
         }
         fetchBlog();
     </script>
-    <script>
-        function openChatbox() {
-            var chatbot = document.getElementById("chatbot");
-            var chatbotbtn = document.getElementById("chatbotbtn");
-            if (chatbot.style.display === "none") {
-                chatbot.style.display = "block";
-                chatbotbtn.style.display = "none";
-            }
-        }
-        function closeChatbox() {
-            var chatbot = document.getElementById("chatbot");
-            var chatbotbtn = document.getElementById("chatbotbtn");
-            if (chatbot.style.display === "block") {
-                chatbot.style.display = "none";
-                chatbotbtn.style.display = "block";
-            }
-        }
-        function sendMessage() {
-            var input = document.getElementById("userInput");
-            var message = document.createElement("div");
-            message.classList.add("content");
-            var content = document.createElement("p");
-            content.textContent = input.value;
-            message.appendChild(content);
-            document.getElementById("chatbox").appendChild(message);
-            input.value = "";
-        }
-    </script>
+
     <script>
         function increment() {
             var quantityInput = document.getElementById('quantity');
