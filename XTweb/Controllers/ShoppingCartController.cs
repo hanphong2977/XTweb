@@ -8,6 +8,7 @@ using XTweb.Models;
 using XTweb.Repository;
 using Microsoft.AspNetCore.Identity;
 using Hangfire.Server;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace XTweb.Controllers
@@ -32,6 +33,7 @@ namespace XTweb.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(HoaDonSanPham order)
         {
+
             var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
             if (cart == null || !cart.Items.Any())
             {
@@ -39,12 +41,15 @@ namespace XTweb.Controllers
                 return RedirectToAction("Index");
             }
             var user = HttpContext.Session.GetInt32("MaKhachHang");
+            var khachHang = await _context.KhachHangs.FirstOrDefaultAsync(kh => kh.MaKhachHang == user);
+            var username = khachHang.HoTen;
             if (user == null)
             {
                 return RedirectToAction("dangnhap", "User");
             }
-            else
+            else 
             {
+                ViewBag.TenKhachHang = username;
                 order.MaKhachHang = (int)user;
                 order.NgayMua = DateTime.UtcNow;
                 order.TongTien = cart.Items.Sum(i => i.Price * i.Quantity);
@@ -58,7 +63,7 @@ namespace XTweb.Controllers
                 await _context.SaveChangesAsync();
 
                 HttpContext.Session.Remove("Cart");
-                return View("OrderCompleted", order.MaHoaDon); // Trang xác nhận hoàn thành đơn hàng
+                return View("OrderCompleted", order); // Trang xác nhận hoàn thành đơn hàng
             }
          
             
