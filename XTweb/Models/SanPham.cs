@@ -21,5 +21,5 @@ public partial class SanPham
 
     public virtual ICollection<CthdsanPham> CthdsanPhams { get; set; } = new List<CthdsanPham>();
 
-    public virtual DanhMucSanPham? MaDanhMucNavigation { get; set; } = null!;
+    public virtual DanhMucSanPham MaDanhMucNavigation { get; set; } = null!;
 }

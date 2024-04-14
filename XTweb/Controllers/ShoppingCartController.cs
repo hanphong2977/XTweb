@@ -28,6 +28,7 @@ namespace XTweb.Controllers
 
             return View(new HoaDonSanPham());
         }
+     
         [HttpPost]
         public async Task<IActionResult> Checkout(HoaDonSanPham order)
         {
@@ -66,7 +67,18 @@ namespace XTweb.Controllers
 
         
         }
+        [HttpPost]
+        public async Task<IActionResult> Tangsoluong(int productId)
+        {
+            var u = await GetProductFromDatabase(productId);
+            if (u != null)
+            {
+                u.SoLuong = +1;
+            }
+          
+            return RedirectToAction("Index");
 
+        }
 
         public async Task<IActionResult> AddToCart(int masanpham, int soluongmua)
         {
@@ -76,24 +88,24 @@ namespace XTweb.Controllers
                 
                     return RedirectToAction("dangnhap", "User");
             }
-            else
+            else    
             {
-                var product = await GetProductFromDatabase(masanpham);
-
-                var cartItem = new CartItem
-                {
-                    ProductId = masanpham,
-                    Name = product.TenSanPham,
-                    Price = product.Gia,
-                    Quantity = soluongmua,
-                    ImageUrl = product.HinhAnh,
-                };
-                var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
-                cart.AddItem(cartItem);
-
-                HttpContext.Session.SetObjectAsJson("Cart", cart);
-
-                return RedirectToAction("Index");
+               var product = await GetProductFromDatabase(masanpham);    
+                    var cartItem = new CartItem
+                    {
+                        ProductId = masanpham,
+                        Name = product.TenSanPham,
+                        Price = product.Gia,
+                        Quantity = soluongmua,
+                        ImageUrl = product.HinhAnh,
+                        MotaSanPham = product.MoTaSanPham,
+                        TongTien = (float)product.Gia * soluongmua
+                    };
+                    var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
+                    cart.AddItem(cartItem);
+                  
+                    HttpContext.Session.SetObjectAsJson("Cart", cart);
+                    return RedirectToAction("Index");        
             }
            
         }
@@ -120,8 +132,37 @@ namespace XTweb.Controllers
                 // Lưu lại giỏ hàng vào Session sau khi đã xóa mục
                 HttpContext.Session.SetObjectAsJson("Cart", cart);
             }
-
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> MinusToCart(int masanpham, int soluongmua)
+        {
+            // Giả sử bạn có phương thức lấy thông tin sản phẩm từ productId
+            if (HttpContext.Session.GetString("sdt") == null)
+            {
+
+                return RedirectToAction("dangnhap", "User");
+            }
+            else
+            {
+                var product = await GetProductFromDatabase(masanpham);
+                var cartItem = new CartItem
+                {
+                    ProductId = masanpham,
+                    Name = product.TenSanPham,
+                    Price = product.Gia,
+                    Quantity = soluongmua,
+                    ImageUrl = product.HinhAnh,
+                    MotaSanPham = product.MoTaSanPham,
+                    TongTien = (float)product.Gia * soluongmua
+                };
+                var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
+         
+                cart.MinusItem(cartItem);
+        
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+                return RedirectToAction("Index");
+            }
+
         }
 
 

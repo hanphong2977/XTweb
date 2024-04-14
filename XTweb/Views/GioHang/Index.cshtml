@@ -1,43 +1,113 @@
 ﻿@model ShoppingCart
 @{
+    Layout = null;
     decimal total = 0;
+    int soluongmua = 1;
 }
-<div class="container mt-5 mb-5" style=" display: grid;
-    grid-template-columns: 70% 30%;">
-    <h2>Your Shopping Cart</h2>
-    <div class="cart-chitietsanpham" style="grid-column: 1;">
-        <a tyle="text-decoration:none;" asp-controller="GioHang" asp-action="ClearCart">
-            <button class="checkout">Xóa Tất Cả</button>
-        </a>
-        @foreach (var item in Model.Items)
-        {
-            <div class="product-chitietsanpham">
-                <img src="@item.ImageUrl" alt="Product 1" style="width: 170px;height: 175px;">
-                <div class="details-chitietsanpham">
-                    <h2>@item.Name</h2>
-                    <p>@item.Price.ToString("#,##0") Vnđ</p>
-                    <div class="quantity-chitietsanpham">
-                        <button class="btn-minus" onclick="decrement()">-</button>
-                        <input style=" width: 60px; text-align: center; margin:0;" type="number" id="quantity" value="@item.Quantity">
-                        <button class="btn-plus" onclick="increment()">+</button>
-                    </div>
-                    <div style="margin-top:30px;">
-                        <a style="text-decoration: none; color:white" asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="remove"><i class="fi fi-rs-trash"></i></a>
-                    </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icon.png" />
+    <title>Xuân Tâm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/css/Cart.css">
+    
+</head>
+<body>
+    <section class="cart-page-header-wrapper container-wrapper">
+        <div class="container">
+            <div style="display:flex; align-items:center; justify-content:space-between">
+                <div class=" cart-page-header">
+                    <h2>Xuân Tâm | Giỏ Hàng</h2>
+                </div>
+                <div class="cart-page-delete-all" style="grid-column: 2;x   ">
+                    <a tyle="text-decoration:none;" asp-controller="GioHang" asp-action="ClearCart">
+                        <button class="btn btn-link">Xóa Tất Cả</button>
+                    </a>
                 </div>
             </div>
-        }
-    </div>
-    <div class="total-chitietsanpham" style="grid-column: 2;">
-        @foreach (var item in Model.Items)
-        {
-            total = total + (Convert.ToDecimal(item.Price) * item.Quantity);
-        }
-        <p>Total: <span id="total-amount">@total</span></p>
-        <a style="text-decoration:none;" asp-controller="GioHang" asp-action="Checkout">
-            <button class="checkout">Thanh Toán</button>
-        </a>
+        </div>
+    </section>
+    <section class="RqMReY">
+        <main class="GO0LDV" style="margin-bottom: 0px">
+            @foreach (var item in Model.Items)
+            {
+                <div class="_9G37m">
+                    <div class="lDiGJB kEMRam">
+                        <div class="f1bSN6">
+                            <div class="brf29Y">
+                                <div class="bzhajK">
+                                    <a title="@item.MotaSanPham" asp-action="chitietsanpham" asp-controller="User" asp-route-id="@item.ProductId">
+                                        <img class="jFEiVQ" src="@item.ImageUrl" alt="product Image" />
+                                    </a>
+                                </div>
+                            </div>
 
+                            <div class="Ou_0WX">
+                                <a title="@item.Name" asp-action="chitietsanpham" asp-controller="User" asp-route-id="@item.ProductId" class="c54pg1">
+                                    @item.Name;
+                                </a>
+                            </div>
+                            <div class="gJyWia">
+                                <div>
+                                    <span class="vjkBXu">
+                                        @item.Price vnđ
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="sluy3i quantity-chitietsanpham">
+                                <div class="GpmJtT xuantam-input-quantity">
+                                    <a style="text-decoration:none;" asp-controller="GioHang" asp-action="MinusToCart" asp-route-masanpham="@item.ProductId" asp-route-soluongmua="@soluongmua">
+                                        <button class="btn-minusplus">-</button>
+                                    </a>
+                                    <input style="width:60px; text-align:center;margin:0" type="number" id="quantity" value="@item.Quantity" />
+                                    <a style="text-decoration:none;" asp-controller="GioHang" asp-action="AddToCart" asp-route-masanpham="@item.ProductId" asp-route-soluongmua="@soluongmua">
+                                        <button class="btn-minusplus">+</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="HRvCAv">
+                                <span>
+                                    @item.TongTien
+                                </span>
+                            </div>
+                            <div class="delete">
+                                <a style="text-decoration: none; color:black" asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="remove"><i class="fi fi-rs-trash"></i>Xóa</a>
+                            </div>
+                        </div>
 
-    </div>
-</div>
+                    </div>
+                </div>
+            }
+       </main>
+               
+      
+    </section>
+    <section class="yn6AIc dhqg2H">
+        <div class="total-chitietsanpham" style="padding-right:30px">
+            @foreach (var item in Model.Items)
+            {
+                total = total + (Convert.ToDecimal(item.Price) * item.Quantity);
+            }
+            <p>Total: <span id="total-amount">@total</span></p>
+            <a style="text-decoration:none;" asp-controller="GioHang" asp-action="Checkout">
+                <button class="btn btn-link">Thanh Toán</button>
+            </a>
+        </div>
+        </div>
+
+    </section>
+    <script>
+       
+      
+
+    </script>
+    </body>
+    </html>

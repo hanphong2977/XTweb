@@ -11,6 +11,7 @@ namespace XTweb.Models
             if (existingItem != null)
             {
                 existingItem.Quantity += item.Quantity;
+                existingItem.TongTien = (float)existingItem.Quantity * (float)existingItem.Price;
             }
             else
             {
@@ -18,6 +19,27 @@ namespace XTweb.Models
             }
         }
 
+        public void MinusItem(CartItem item)
+        {
+            var existingItem = Items.FirstOrDefault(i => i.ProductId == item.ProductId);
+            if ( existingItem != null )
+            {
+                if (existingItem.Quantity == 1)
+                {
+                    RemoveItem(item.ProductId);
+                }
+                else
+                {
+                    if (existingItem.Quantity > 1)
+                    {
+                        existingItem.Quantity -= item.Quantity;
+                        existingItem.TongTien = (float)existingItem.Quantity * (float)existingItem.Price;
+                    }
+                }
+            }
+        
+        }
+      
         public void RemoveItem(int productId)
         {
             Items.RemoveAll(i => i.ProductId == productId);
