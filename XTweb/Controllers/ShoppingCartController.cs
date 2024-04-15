@@ -9,6 +9,7 @@ using XTweb.Repository;
 using Microsoft.AspNetCore.Identity;
 using Hangfire.Server;
 using Microsoft.EntityFrameworkCore;
+using XTweb.Models.Authentication;
 
 
 namespace XTweb.Controllers
@@ -28,18 +29,14 @@ namespace XTweb.Controllers
         {
 
             return View(new HoaDonSanPham());
+            
         }
-     
+        
         [HttpPost]
         public async Task<IActionResult> Checkout(HoaDonSanPham order)
         {
 
-            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
-            if (cart == null || !cart.Items.Any())
-            {
-                // Xử lý giỏ hàng trống...
-                return RedirectToAction("Index");
-            }
+            
             var user = HttpContext.Session.GetInt32("MaKhachHang");
             var khachHang = await _context.KhachHangs.FirstOrDefaultAsync(kh => kh.MaKhachHang == user);
             var username = khachHang.HoTen;
@@ -49,21 +46,32 @@ namespace XTweb.Controllers
             }
             else 
             {
-                ViewBag.TenKhachHang = username;
-                order.MaKhachHang = (int)user;
-                order.NgayMua = DateTime.UtcNow;
-                order.TongTien = cart.Items.Sum(i => i.Price * i.Quantity);
-                order.CthdsanPhams = cart.Items.Select(i => new CthdsanPham
+                var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
+                if (cart == null || !cart.Items.Any())
                 {
-                    MaSanPham = i.ProductId,
-                    SoLuongMua = i.Quantity,
-                    Gia = Convert.ToDecimal(i.Price),
-                }).ToList();
-                _context.HoaDonSanPhams.Add(order);
-                await _context.SaveChangesAsync();
+                    // Xử lý giỏ hàng trống...
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.TenKhachHang = username;
+                    order.MaKhachHang = (int)user;
+                    order.NgayMua = DateTime.UtcNow;
+                    order.TongTien = cart.Items.Sum(i => i.Price * i.Quantity);
+                    order.CthdsanPhams = cart.Items.Select(i => new CthdsanPham
+                    {
+                        MaSanPham = i.ProductId,
+                        SoLuongMua = i.Quantity,
+                        Gia = Convert.ToDecimal(i.Price),
+                    }).ToList();
+                    _context.HoaDonSanPhams.Add(order);
+                    await _context.SaveChangesAsync();
 
-                HttpContext.Session.Remove("Cart");
-                return View("OrderCompleted", order); // Trang xác nhận hoàn thành đơn hàng
+                    HttpContext.Session.Remove("Cart");
+                    return View("OrderCompleted", order);
+
+                }
+              // Trang xác nhận hoàn thành đơn hàng
             }
          
             
@@ -114,6 +122,7 @@ namespace XTweb.Controllers
             }
            
         }
+        [Authentication]
         public IActionResult Index()
         {
             var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
