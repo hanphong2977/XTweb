@@ -24,8 +24,11 @@
     <section class="cart-page-header-wrapper container-wrapper">
         <div class="container">
             <div style="display:flex; align-items:center; justify-content:space-between">
-                <div class=" cart-page-header">
-                    <h2>Xuân Tâm | Giỏ Hàng</h2>
+                <div class=" cart-page-header" style="display:flex; align-items:center">
+                    <a asp-action="Index" asp-controller="User" style="text-decoration: none; color:#ad9551">
+                        <h2>Xuân Tâm</h2>
+                    </a>
+                    <h2>| Giỏ Hàng</h2>
                 </div>
                 <div class="cart-page-delete-all" style="grid-column: 2;x   ">
                     <a tyle="text-decoration:none;" asp-controller="GioHang" asp-action="ClearCart">
